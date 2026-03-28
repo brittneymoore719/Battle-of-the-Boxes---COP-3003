@@ -1,0 +1,153 @@
+static StageController: {
+  shape: class
+
+  +static changeStage(Stage newStage): void
+
+  -static m_currentStage: Stage
+}
+
+Stage: {
+  shape: class
+
+  +Stage(): Constructor
+  +virtual update(): void
+}
+
+TitleStage: "TitleStage : Stage" {
+  shape: class
+
+  +TitleStage(): void
+  +update() override: void
+
+  -m_uiObjects: std::array<UiElementBase>
+  -m_backgroundTexture: sf::Texture
+
+  -\.\.\. whatever else we need: " "
+}
+
+TitleStageCodeSample: |c++
+
+
+  TitleStage::TitleStage() {
+    m_backgroundTexture.loadFromFile("background.png");
+
+    m_uiObjects = {PlayButton()};
+  }
+
+  TitleStage::update() {
+    window.draw(m_backgroundTexture) // window would probably come from some static window manager
+
+    // ui objects are updated and drawn after the background so that they go on top of it
+    for (auto object : uiObjects) {
+      object.update();
+    }
+  }
+|
+static StageController -- Stage
+Stage -> TitleStage
+Stage -> GamePlayStage
+
+UiElementBase: {
+  shape: class
+  "+UiElementBase()": void
+  "+virtual update()": void
+}
+
+PlayButton: "PlayButton : UiElementBase" {
+  shape: class
+
+  PlayButton(): constructor
+  update() override: void
+
+  -m_texture: sf::Texture
+
+  -hasBeenClicked(): bool
+}
+
+PlayButtonCoseSample: |c++
+
+  // runs when the play button is created, used for initialization
+  // in the actual game we could have this extend a Button class
+  PlayButton::PlayButton() {
+    m_texture.loadFromFile("image.png");
+  }
+
+  PlayButton::update() {
+    window.draw(m_texture) // window would probably come from some static window manager class
+
+    if (hasBeenClicked()) {
+      StageController.changeStage(GamePlayStage())
+    }
+  }
+|
+
+UiElementBase -> PlayButton
+
+TitleStage -> TitleStageCodeSample
+PlayButton -- PlayButtonCoseSample
+
+TitleStageCodeSample -- PlayButtonCoseSample
+
+GamePlayStage: "GamePlayStage : Stage" {
+  shape: class
+
+  +GamePlayStage(): void
+  +update() override: void
+
+  -m_player: Player
+  -m_enemies: std::array<Enemy>
+  -m_backgroundTexture: sf::Texture
+
+  -handleCombatActions(): void
+  -\.\.\. whatever else we need: " "
+}
+
+GamePlayStage -- Player
+GamePlayStage -- Enemy
+
+Character: {
+  shape: class
+
+  -m_health: HealthPool
+  -m_position: sf::Vector2f
+  -m_texture: sf::Texture
+
+  -m_selectedAction: Action?
+  +hasAction(): bool
+}
+Character -> Player
+Player: "Player : Character" {
+  shape: class
+
+  +handleUserInput(): void
+}
+Character -> Enemy
+Enemy: "Enemy : Character" {
+  shape: class
+
+  +selectEnemyAction(): void
+}
+
+GamePlayStage -> GamePlayStageCodeSample
+
+GamePlayStageCodeSample: |c++
+  GamePlayStage::GamePlayStage() {
+    m_player = Player();
+    m_enemies = /* maybe something to generate random enemies */;
+    m_backgroundTexture.loadFromFile("gameplay-blackground.png");
+  }
+
+  GamePlayStage::update() {
+    window.draw(m_backgroundTexture) // window would probably come from some static window manager
+
+    m_player.handleUserInput();
+    if (m_player.hasAction()) {
+      for (Enemy enemy : enemies) {
+        enemy.selectEnemyAction();
+      }
+
+      // both the player and the enemies selected an action so do the actions
+      handleCombatActions();
+    }
+  }
+|
