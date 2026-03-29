@@ -11,6 +11,14 @@ class Stage { // : Updatable or whatever we decide to name the virtual class tha
 
 public:
 
-    Stage(StageType type);
+    Stage(StageType type): m_type(type) {}
+
+    StageType getType() const {
+        return m_type;
+    }
+
+private:
+
+    StageType m_type;
 
 };
