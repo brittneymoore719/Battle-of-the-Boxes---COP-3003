@@ -8,6 +8,7 @@
 class Updatable {
 
 public:
+    virtual ~Updatable() = default;
 
     virtual void update();
 
