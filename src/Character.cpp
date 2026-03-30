@@ -1,0 +1,22 @@
+#include "Character.h"
+
+//basic constructor for the Box, this is subject to change
+Character::Character()
+{
+  m_health=100;
+}
+
+//possible logic for combat with the warehouse workers/other mobs
+void Character::takeDame(int amount)
+{
+  m_health -= amount;
+  if (m_health<0) m_health=0;
+}
+
+//possible loigc for player movement
+void character::update(float deltaTime)
+{
+
+  //WASD keyboard movement and manye on screen movement will have its logic handled here later.
+  
+}
