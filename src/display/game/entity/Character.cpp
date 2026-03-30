@@ -14,9 +14,9 @@ void Character::takeDame(int amount)
 }
 
 //possible loigc for player movement
-void character::update(float deltaTime)
+void Character::update()
 {
 
-  //WASD keyboard movement and manye on screen movement will have its logic handled here later.
+  //WASD keyboard movement and many on screen movement will have its logic handled here later.
   
 }
