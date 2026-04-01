@@ -6,7 +6,7 @@
 
 #endif //BATTLE_OF_THE_BOXES___COP_3003_CHARACTER_H
 
-class Character : GameObject {
+class Character : public GameObject {
     public:
 
     Character();
