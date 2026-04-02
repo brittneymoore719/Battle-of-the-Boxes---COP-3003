@@ -5,7 +5,6 @@
 #define BATTLE_OF_THE_BOXES_COP_3003_STAGECONTROLLER_H
 #include "../stage/Stage.h"
 
-#endif //BATTLE_OF_THE_BOXES_COP_3003_STAGECONTROLLER_H
 
 
 // This should be a singleton class
@@ -24,3 +23,5 @@ private:
     StageController();
 
 };
+
+#endif //BATTLE_OF_THE_BOXES_COP_3003_STAGECONTROLLER_H

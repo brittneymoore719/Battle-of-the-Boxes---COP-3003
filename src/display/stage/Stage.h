@@ -3,7 +3,6 @@
 #ifndef BATTLE_OF_THE_BOXES_COP_3003_STAGE_H
 #define BATTLE_OF_THE_BOXES_COP_3003_STAGE_H
 
-#endif //BATTLE_OF_THE_BOXES_COP_3003_STAGE_H
 
 enum StageType {MENU, LEVEL, BATTLE, SHOPKEEPER};
 
@@ -22,3 +21,6 @@ private:
     StageType m_type;
 
 };
+
+
+#endif //BATTLE_OF_THE_BOXES_COP_3003_STAGE_H
