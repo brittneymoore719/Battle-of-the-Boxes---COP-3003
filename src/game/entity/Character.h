@@ -11,6 +11,8 @@ class Character : public GameObject {
 
     Character();
 
+    void update();
+    void takeDame(int amount);
     private:
 
     double m_health;
