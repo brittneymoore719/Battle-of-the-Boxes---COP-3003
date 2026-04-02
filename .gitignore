@@ -1,7 +1,8 @@
 # this file is so that random temporary files don't get added to the git repo from your IDE / tools we use
 build
 
-
+# zed specific configuration files
+.zed
 
 # cmake temp files: https://github.com/github/gitignore/blob/main/CMake.gitignore
 CMakeLists.txt.user
