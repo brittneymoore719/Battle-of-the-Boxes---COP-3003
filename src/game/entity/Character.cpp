@@ -7,9 +7,9 @@ Character::Character()
 }
 
 //possible logic for combat with the warehouse workers/other mobs
-void Character::takeDame(int amount)
+void Character::takeDamage(double damage)
 {
-  m_health -= amount;
+  m_health -= damage;
   if (m_health<0) m_health=0;
 }
 

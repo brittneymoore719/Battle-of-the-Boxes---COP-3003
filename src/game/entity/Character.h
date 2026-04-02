@@ -16,11 +16,14 @@ public:
 
     std::array<double, 2> getPositionVector();
 
+    void takeDamage(double damage);
+
+
+    void update();
 
 private:
-    void update();
-    void takeDame(int amount);
-    private:
+
+
 
     std::array<double, 2> m_position;
 
