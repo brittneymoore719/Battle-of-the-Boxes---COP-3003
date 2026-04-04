@@ -14,7 +14,9 @@ class Character : public GameObject {
 
 public:
 
-    std::array<double, 2> getPositionVector();
+    std::array<double, 2> getPositionVector() const {
+        return m_position;
+    }
 
     void takeDamage(double damage);
 

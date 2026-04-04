@@ -3,7 +3,8 @@
 //basic constructor for the Box, this is subject to change
 Character::Character()
 {
-  m_health=100;
+  m_health = 100;
+  m_position = {0, 0};
 }
 
 //possible logic for combat with the warehouse workers/other mobs

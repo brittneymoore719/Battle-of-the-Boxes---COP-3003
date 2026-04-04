@@ -19,7 +19,9 @@ file(GLOB_RECURSE
     ${CMAKE_SOURCE_DIR}/src/*.cpp
 )
 
-add_executable(Battle-of-the-Boxes ${SOURCE_FILES})
+add_executable(Battle-of-the-Boxes ${SOURCE_FILES}
+        src/game/combat/CombatSequence.cpp
+        src/game/combat/CombatSequence.h)
 target_include_directories(Battle-of-the-Boxes PRIVATE ${CMAKE_SOURCE_DIR}/src/)
 target_compile_features(Battle-of-the-Boxes PRIVATE cxx_std_20)
 target_link_libraries(Battle-of-the-Boxes PRIVATE SFML::Graphics)
