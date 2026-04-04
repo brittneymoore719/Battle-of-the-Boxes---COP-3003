@@ -2,6 +2,9 @@
 // These headers were created by CLion automatically
 #ifndef BATTLE_OF_THE_BOXES_COP_3003_STAGE_H
 #define BATTLE_OF_THE_BOXES_COP_3003_STAGE_H
+#include <vector>
+
+#include "display/displayable/Displayable.h"
 
 
 enum StageType {MENU, LEVEL, BATTLE, SHOPKEEPER};
@@ -12,13 +15,17 @@ public:
 
     Stage(StageType type): m_type(type) {}
 
-    StageType getType() const {
-        return m_type;
-    }
+    StageType getType() const;
+
+    std::vector<Displayable> getDisplayables() const;
+
+
 
 private:
 
-    StageType m_type;
+    const StageType m_type;
+
+    std::vector<Displayable> m_displayables;
 
 };
 

@@ -14,12 +14,6 @@ class Character : public GameObject {
 
 public:
 
-    std::array<double, 2> getPositionVector() const {
-        return m_position;
-    }
-
-    void takeDamage(double damage);
-
 
     void update();
 
@@ -27,7 +21,7 @@ private:
 
 
 
-    std::array<double, 2> m_position;
+
 
     double m_health;
 
