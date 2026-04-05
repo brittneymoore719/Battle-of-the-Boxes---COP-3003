@@ -11,11 +11,13 @@ class Stage { // : Updatable or whatever we decide to name the virtual class tha
 public:
 
     Stage(StageType type): m_type(type) {}
+    virtual ~Stage() = default;
 
     StageType getType() const {
         return m_type;
     }
 
+    virtual void update() = 0;
 private:
 
     StageType m_type;
