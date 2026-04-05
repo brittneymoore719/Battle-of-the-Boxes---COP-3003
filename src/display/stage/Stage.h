@@ -13,9 +13,9 @@ public:
     explicit Stage(std::vector<Displayable> displayables);
     virtual ~Stage() = default;
 
-    const std::vector<Displayable>& getDisplayables() const;
+    virtual void update() = 0;
 
-    void update() override;
+    const std::vector<Displayable>& getDisplayables() const;
 
 private:
 

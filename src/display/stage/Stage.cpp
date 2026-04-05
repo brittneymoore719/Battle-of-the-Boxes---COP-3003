@@ -13,9 +13,3 @@ explicit Stage::Stage(std::vector<Displayable> displayables):
 const std::vector<Displayable>& Stage::getDisplayables() const {
     return m_displayables;
 }
-
-void Stage::update() {
-
-    ;
-
-}
