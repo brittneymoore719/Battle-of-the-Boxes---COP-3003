@@ -16,11 +16,7 @@ class CombatSequence {
 
 public:
 
-    CombatSequence(const std::array<Character, 2>& combatants):
-
-    m_combatants(combatants)
-
-    {};
+    CombatSequence(const std::array<Character, 2>& combatants);
 
     std::array<Character, 2> getCombatants();
 
