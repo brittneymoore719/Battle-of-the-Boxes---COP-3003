@@ -9,7 +9,7 @@ class GameObject : Displayable {
 public:
 
 
-    GameObject(std::array<double,2> position):
+    GameObject(std::array<double,2> position = {0,0}):
 
     m_position(position)
 
