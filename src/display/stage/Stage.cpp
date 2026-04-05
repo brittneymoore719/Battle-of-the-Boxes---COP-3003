@@ -6,7 +6,7 @@
 
 #include <utility>
 
-explicit Stage::Stage(std::vector<Displayable> displayables):
+Stage::Stage(std::vector<Displayable> displayables):
     m_displayables(std::move(displayables))
 {}
 
