@@ -24,7 +24,6 @@ class Character : public GameObject {
         double critChance = 0.1,
         double critMultiplier = 0.25
 
-
         );
 
 public:
