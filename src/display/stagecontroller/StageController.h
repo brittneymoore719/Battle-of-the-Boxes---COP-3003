@@ -1,27 +1,13 @@
-
-#pragma once
-
 #ifndef BATTLE_OF_THE_BOXES_COP_3003_STAGECONTROLLER_H
 #define BATTLE_OF_THE_BOXES_COP_3003_STAGECONTROLLER_H
 #include "../stage/Stage.h"
 
-
-
-// This should be a singleton class
 class StageController {
-
 public:
-
-    static StageController getInstance();
-
+    static void changeStage(Stage* newStage);
+    static void updateStage();
 private:
-
-    static StageController instance;
-
-    Stage m_currentStage;
-
-    StageController();
-
+    static Stage* m_currentStage;
 };
 
 #endif //BATTLE_OF_THE_BOXES_COP_3003_STAGECONTROLLER_H

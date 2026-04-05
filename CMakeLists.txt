@@ -20,6 +20,9 @@ file(GLOB_RECURSE
 )
 
 add_executable(Battle-of-the-Boxes ${SOURCE_FILES}
+        src/game/combat/CombatSequence.cpp
+        src/game/combat/CombatSequence.h
+        src/display/stage/Stage.h
         src/game/combat/combatant/Combatant.cpp
         src/game/combat/combatant/PlayerCombatant.cpp
 
