@@ -15,6 +15,8 @@ public:
     Stage(StageType type, std::vector<Displayable> displayables);
     virtual ~Stage() = default;
 
+    virtual void update() = 0;
+
     StageType getType() const;
 
     const std::vector<Displayable>& getDisplayables() const;

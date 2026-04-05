@@ -18,9 +18,3 @@ StageType Stage::getType() const {
 const std::vector<Displayable>& Stage::getDisplayables() const {
     return m_displayables;
 }
-
-void Stage::update() {
-
-    ;
-
-}
