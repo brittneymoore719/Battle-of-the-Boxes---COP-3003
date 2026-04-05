@@ -11,7 +11,13 @@ class Displayable : Updatable {
 
 public:
 
-    Displayable();
+    Displayable(bool isDisplayed = false, std::array<double, 2> screenPos = {0.0, 0.0});
+
+    Displayable(Displayable& displayable);
+
+    bool isDisplayed() const;
+
+    void setDisplayed(bool isDisplayed);
 
     std::array<double,2> getScreenPosition();
 
@@ -19,7 +25,10 @@ public:
 
 private:
 
-    std::array<double,2> m_screenPosition; // where the thing is on the screen
+    bool m_isDisplayed;
+
+    std::array<double,2> m_screenPosition{}; // where the thing is on the screen
+
 
 };
 

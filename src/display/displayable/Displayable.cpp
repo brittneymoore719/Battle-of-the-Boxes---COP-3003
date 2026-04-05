@@ -4,6 +4,28 @@
 
 #include "Displayable.h"
 
+Displayable::Displayable(bool isDisplayed, std::array<double, 2> screenPos):
+
+    m_isDisplayed(isDisplayed),
+    m_screenPosition(screenPos)
+
+{}
+
+Displayable::Displayable(Displayable& displayable) {
+
+    m_isDisplayed = displayable.m_isDisplayed;
+    m_screenPosition = displayable.m_screenPosition;
+
+}
+
+bool Displayable::isDisplayed() const {
+    return m_isDisplayed;
+}
+
+void Displayable::setDisplayed(bool displayed) {
+    m_isDisplayed = displayed;
+}
+
 std::array<double, 2> Displayable::getScreenPosition() {
     return m_screenPosition;
 }

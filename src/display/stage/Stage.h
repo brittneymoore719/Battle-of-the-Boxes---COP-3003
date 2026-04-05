@@ -9,21 +9,21 @@
 
 enum StageType {MENU, LEVEL, BATTLE, SHOPKEEPER};
 
-class Stage { // : Updatable or whatever we decide to name the virtual class that first implements update()
+class Stage : Updatable {
 
 public:
 
-    Stage(StageType type): m_type(type) {}
+    Stage(StageType type, std::vector<Displayable> displayables = {});
 
     StageType getType() const;
 
-    std::vector<Displayable> getDisplayables() const;
+    const std::vector<Displayable>& getDisplayables() const;
 
-
+    void update() override;
 
 private:
 
-    const StageType m_type;
+    StageType m_type;
 
     std::vector<Displayable> m_displayables;
 

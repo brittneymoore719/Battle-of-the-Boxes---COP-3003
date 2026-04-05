@@ -4,10 +4,17 @@
 
 #include "Stage.h"
 
+#include <utility>
+
+Stage::Stage(StageType type, std::vector<Displayable> displayables):
+    m_type(type),
+    m_displayables(std::move(displayables))
+{}
+
 StageType Stage::getType() const {
     return m_type;
 }
 
-std::vector<Displayable> Stage::getDisplayables() const {
+const std::vector<Displayable>& Stage::getDisplayables() const {
     return m_displayables;
 }
