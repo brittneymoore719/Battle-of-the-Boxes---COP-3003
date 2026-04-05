@@ -7,21 +7,17 @@
 #include "display/displayable/Displayable.h"
 
 
-enum StageType {MENU, LEVEL, BATTLE, SHOPKEEPER};
-
 class Stage : public Updatable {
 
 public:
-    Stage(StageType type, std::vector<Displayable> displayables);
+    explicit Stage(std::vector<Displayable> displayables);
     virtual ~Stage() = default;
-
-    StageType getType() const;
 
     const std::vector<Displayable>& getDisplayables() const;
 
-private:
+    void update() override;
 
-    StageType m_type;
+private:
 
     std::vector<Displayable> m_displayables;
 

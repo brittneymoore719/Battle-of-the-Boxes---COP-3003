@@ -2,7 +2,7 @@
 #include "display/stage/Stage.h"
 #include <iostream>
 
-TitleStage::TitleStage() : Stage(StageType::MENU, {}) {
+TitleStage::TitleStage() : Stage({}) {
     std::cout << "TitleStage initialized\n";
 }
 

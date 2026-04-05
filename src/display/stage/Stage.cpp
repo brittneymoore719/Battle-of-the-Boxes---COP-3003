@@ -6,14 +6,9 @@
 
 #include <utility>
 
-Stage::Stage(StageType type, std::vector<Displayable> displayables):
-    m_type(type),
+explicit Stage::Stage(std::vector<Displayable> displayables):
     m_displayables(std::move(displayables))
 {}
-
-StageType Stage::getType() const {
-    return m_type;
-}
 
 const std::vector<Displayable>& Stage::getDisplayables() const {
     return m_displayables;

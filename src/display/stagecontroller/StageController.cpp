@@ -1,6 +1,6 @@
 #include "display/stagecontroller/StageController.h"
 #include "display/stage/Stage.h"
-#include "display/stage/TitleStage.h"
+#include "../stage/title/TitleStage.h"
 
 // defaults to the title stage
 Stage* StageController::m_currentStage = new TitleStage();

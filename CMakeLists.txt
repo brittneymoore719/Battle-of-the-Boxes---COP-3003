@@ -25,6 +25,8 @@ add_executable(Battle-of-the-Boxes ${SOURCE_FILES}
         src/display/stage/Stage.h
         src/game/combat/combatant/Combatant.cpp
         src/game/combat/combatant/PlayerCombatant.cpp
+        src/display/stage/battle/BattleStage.cpp
+        src/display/stage/battle/BattleStage.h
 
 )
 target_include_directories(Battle-of-the-Boxes PRIVATE ${CMAKE_SOURCE_DIR}/src/)

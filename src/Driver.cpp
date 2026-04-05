@@ -1,5 +1,5 @@
 #include "display/stage/Stage.h"
-#include "display/stage/TitleStage.h"
+#include "display/stage/title/TitleStage.h"
 #include "display/stagecontroller/StageController.h"
 #include <iostream>
 #include <string>

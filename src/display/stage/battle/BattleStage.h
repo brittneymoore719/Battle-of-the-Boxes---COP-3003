@@ -1,0 +1,8 @@
+//
+// Created by worm on 4/5/2026.
+//
+
+#ifndef BATTLE_OF_THE_BOXES_BATTLESTAGE_H
+#define BATTLE_OF_THE_BOXES_BATTLESTAGE_H
+
+#endif //BATTLE_OF_THE_BOXES_BATTLESTAGE_H
