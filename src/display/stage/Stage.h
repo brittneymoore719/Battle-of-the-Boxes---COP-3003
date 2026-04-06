@@ -8,19 +8,9 @@
 
 
 class Stage : public Updatable {
-
 public:
-    explicit Stage(std::vector<Displayable> displayables);
     virtual ~Stage() = default;
-
     virtual void update() = 0;
-
-    const std::vector<Displayable>& getDisplayables() const;
-
-private:
-
-    std::vector<Displayable> m_displayables;
-
 };
 
 
