@@ -15,7 +15,7 @@ public:
     explicit Combatant(Character& character);
     virtual ~Combatant() = default;
 
-    virtual void act(Character& target) = 0;
+    virtual void act(Character& target);
 
     Character& getCharacter();
 

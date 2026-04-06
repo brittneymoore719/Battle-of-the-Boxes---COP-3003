@@ -8,8 +8,8 @@
 PlayerCombatant::PlayerCombatant(Character& character)
     : Combatant(character) {}
 
-void PlayerCombatant::act(Character& target) 
+void PlayerCombatant::act(Character& target)
 {
     double damage = m_character.getStatistic(BASE_DMG);
-    target.takeDamage(damage);
+    // target.takeDamage(damage);
 }

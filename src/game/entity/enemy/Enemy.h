@@ -4,7 +4,7 @@
 #define BATTLE_OF_THE_BOXES___COP_3003_ENEMY_H
 #include "../Character.h"
 
-class Enemy : Character {
+class Enemy : public Character {
 
 
 

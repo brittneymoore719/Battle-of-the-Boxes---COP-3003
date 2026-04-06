@@ -1,4 +1,4 @@
-#include "MainMenu.h"
+#include "Mainmenu.h"
 #include <iostream>
 
 void MainMenu::display() {
