@@ -26,9 +26,8 @@ class Character : public GameObject {
 
         );
 
-public:
-
     double getStatistic(Statistic stat) const;
+    void takeDamage(double damageAmount);
 
     void update();
 

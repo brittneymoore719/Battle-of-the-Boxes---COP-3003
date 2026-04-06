@@ -24,5 +24,9 @@ double Character::getStatistic(Statistic stat) const {
 void Character::update() {
 
 
-  
+
+}
+
+void Character::takeDamage(double damageAmount) {
+    m_statistics[Statistic::CURRENT_HP] -= damageAmount;
 }
