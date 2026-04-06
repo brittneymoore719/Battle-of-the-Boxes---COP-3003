@@ -17,6 +17,8 @@ if you are on linux make sure you have all of sfml's requirements found on [sfml
 Game Description:
   A roguelike turn-based dungeoncrawler (innovative, I know...) where the user plays as a box trying to escape an Amazon warehouse. During their escape, they have to battle zombie-like workers and finally defeat Jeff Bezos to win.
 
+Controls:
+The player will use either W, A, S, and D keys to move throughout the game, with some moments requiring input from the the players mouse with on screen buttons.
 ## UML diagram
 ![UML Diagram Image](uml.png)
 to generate an image from the d2 code run: d2 uml.d2 uml.png
