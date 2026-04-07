@@ -4,10 +4,15 @@
 
 Enemy::Enemy(std::string name, double maxHp, double baseDmg, double defense, double accuracy)
     : Character(maxHp, maxHp, baseDmg, 0.0, defense, 0.0, accuracy),
-      m_name(name){}
+      m_name(name)
+      m_type(type){}
+
 
 std::string Enemy::getName() const { return m_name; }
 
 bool Enemy::isAlive() const { return getStatistic(CURRENT_HP) > 0; }
-    //Enemy-specific logic will be held here
+
+EnemyType Enemy::getType() const { return m_type; }
+ 
+//Enemy-specific logic will be held here
 //enemies will inherit health and movement from the character
