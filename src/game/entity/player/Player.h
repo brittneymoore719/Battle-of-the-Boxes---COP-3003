@@ -29,6 +29,7 @@ public:
         return m_health > 0;
     }
 
+    void heal(int amount);
     void takeDamage(int damage);
 
 private:
@@ -39,3 +40,4 @@ private:
 #endif
 
 //Edited by Woodolph sylvain 4/5/26
+//edited by Brittney Moore 4/7/2026
