@@ -34,13 +34,13 @@ void BattleStage::update() {
     if (playerAction == 1) {
         std::cout << "doing player attack\n";
         m_enemy.takeDamage(GameConstants::PLAYER_ATTACK_DAMAGE);
-        std::cout << "enemy has taken 5 damage\n";
+        std::cout << "enemy has taken " << GameConstants::PLAYER_ATTACK_DAMAGE << " damage\n";
     }
 
     std::cout << "doing enemy attack\n";
     if (!m_player.dodged()) {
         m_player.takeDamage(GameConstants::ENEMY_ATTACK_DAMAGE);
-        std::cout << "player has taken 3 damage\n";
+        std::cout << "player has taken " << GameConstants::ENEMY_ATTACK_DAMAGE << " damage\n";
     } else {
         std::cout << "dodged enemy damage\n";
     }
