@@ -15,7 +15,7 @@ namespace GameConstants {
     //enemy
     const int MAX_ENEMY_HEALTH = 100;
     const int ENEMY_SPEED = 5;
-    const int ENEMY_ATACK_DAMAGE = 10;
+    const int ENEMY_ATTACK_DAMAGE = 10;
 
     //combat - levels for the player to complete 
     const int MAX_FLOORS = 5;
