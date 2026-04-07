@@ -9,6 +9,7 @@
 #include "display/stage/title/TitleStage.h"
 #include "display/stagecontroller/StageController.h"
 #include "game/entity/Character.h"
+#include "game/Constants.h"
 
 BattleStage::BattleStage() : Stage() {
     std::cout << "BattleStage initialized\n";
@@ -32,13 +33,13 @@ void BattleStage::update() {
     if (playerAction < 1 ||playerAction > 2) return;
     if (playerAction == 1) {
         std::cout << "doing player attack\n";
-        m_enemy.takeDamage(5);
+        m_enemy.takeDamage(GameConstants::PLAYER_ATTACK_DAMAGE);
         std::cout << "enemy has taken 5 damage\n";
     }
 
     std::cout << "doing enemy attack\n";
     if (!m_player.dodged()) {
-        m_player.takeDamage(3);
+        m_player.takeDamage(GameConstants::ENEMY_ATTACK_DAMAGE);
         std::cout << "player has taken 3 damage\n";
     } else {
         std::cout << "dodged enemy damage\n";
