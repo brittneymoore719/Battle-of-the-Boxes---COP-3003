@@ -8,11 +8,8 @@ class GameException : public std::exception {
 private:
     std::string message;
 public:
-    GameException(const std::string& msg) : message(msg) {}
-
-    virtual const char* what() const noexcept override {
-        return message.c_str();
-    }
+    explicit GameException(const std::string& msg);
+    const char* what() const noexcept override;
 };
 
 #endif
