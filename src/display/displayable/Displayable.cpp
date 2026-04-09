@@ -27,5 +27,9 @@ void Displayable::setScreenPosition(std::array<double, 2> position) {
     m_screenPosition = position;
 }
 
+const sf::Image Displayable::getSprite() const {
+    return m_sprite;
+}
+
 void Displayable::update() {
 }
