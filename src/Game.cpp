@@ -1,11 +1,13 @@
 #include <iostream>
 
+#include "SFML/Graphics/RenderWindow.hpp"
+
 // if we truly want a Game object it should be a singleton
 
 class Game{
 public:
 
-  static Game getInstance() {
+  static Game& getInstance() {
     return instance;
   }
 
@@ -17,8 +19,6 @@ private:
 
   static Game instance;
 
-  Game() = default;
+  sf::RenderWindow renderWindow{sf::VideoMode({800, 600}), "Battle of the Boxes"};
 
 };
-
-//todo add in main game loop and box logic

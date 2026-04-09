@@ -2,9 +2,9 @@
 #include "../Character.h"
 #include "Enemy.h"
 
-Enemy::Enemy(std::string name, double maxHp, double baseDmg, double defense, double accuracy)
+Enemy::Enemy(std::string name, EnemyType type, double maxHp, double baseDmg, double defense, double accuracy)
     : Character(maxHp, maxHp, baseDmg, 0.0, defense, 0.0, accuracy),
-      m_name(name)
+      m_name(name),
       m_type(type){}
 
 

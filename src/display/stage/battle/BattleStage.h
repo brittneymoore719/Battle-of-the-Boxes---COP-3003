@@ -19,4 +19,6 @@ private:
     PlayerCharacter m_player{};
  Enemy m_enemy{"Zombie Worker", EnemyType::ZOMBIE_WORKER};
 
+};
+
 #endif //BATTLE_OF_THE_BOXES_BATTLESTAGE_H

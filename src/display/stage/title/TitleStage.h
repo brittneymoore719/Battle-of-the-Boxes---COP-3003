@@ -7,7 +7,7 @@ class TitleStage : public Stage {
 public:
     TitleStage();
     virtual ~TitleStage() = default;
-    virtual void update() override;
+    void update() override;
 private:
     UiButton startButton{"Start Game"};
 };

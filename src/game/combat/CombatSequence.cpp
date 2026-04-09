@@ -14,8 +14,8 @@ CombatSequence::CombatSequence(std::array<Combatant, 2> combatants):
 
 void CombatSequence::playRound() {
     //get attacker and defender absed on whose turn it is
-    Combatant& attacker = m_combatant[m_turn];
-    Combatant& defender = m_combatant[!m_turn];
+    Combatant& attacker = m_combatants[m_turn];
+    Combatant& defender = m_combatants[!m_turn];
 
     //attacker atacks defender
     attacker.act(defender.getCharacter());
