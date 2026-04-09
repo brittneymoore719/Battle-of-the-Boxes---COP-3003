@@ -1,18 +1,24 @@
-#include "display/stage/Stage.h"
-#include "display/stage/title/TitleStage.h"
+#include <SFML/Graphics/RenderWindow.hpp>
 #include "display/stagecontroller/StageController.h"
-#include <iostream>
-#include <string>
+#include "WindowManager.h"
 
 
 
 
 int main() {
-    std::cout << "Starting main game loop\n";
-	while ( true )
+    sf::RenderWindow& window = WindowManager::getWindow();
+
+	while ( window.isOpen() )
 	{
+        WindowManager::handleEvents();
+
+
+        window.clear();
+
 	    // update current stage
 		StageController::updateStage();
+
+		window.display();
 	}
     return 0;
 }
