@@ -5,13 +5,11 @@
 #include "uiElements/UiButton.h"
 #include <iostream>
 
-TitleStage::TitleStage() : Stage() {
+TitleStage::TitleStage() : Stage(), startButton{"Start Game", {200,200}, {300,150}} {
     std::cout << "TitleStage initialized\n";
 }
 
 void TitleStage::update() {
-    std::cout << "TitleStage received update call\n";
-
     startButton.update();
 
     // change stage if start button was pressed
@@ -19,6 +17,4 @@ void TitleStage::update() {
         std::cout << "changing stage to BattleStage\n";
         StageController::changeStage(new BattleStage());
     }
-
-	std::cout << "\n\n";
 }

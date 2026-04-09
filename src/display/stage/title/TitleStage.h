@@ -9,7 +9,7 @@ public:
     virtual ~TitleStage() = default;
     void update() override;
 private:
-    UiButton startButton{"Start Game"};
+    UiButton startButton;
 };
 
 #endif
