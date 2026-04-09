@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Player.h"
-#include "game/constants.h"
+#include "game/Constants.h"
 
 void Player::takeDamage(int damage) {
     if (damage < 0) {
