@@ -19,6 +19,10 @@ file(GLOB_RECURSE
     ${CMAKE_SOURCE_DIR}/src/*.cpp
 )
 
+file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/src/sprites"
+     DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/")
+
+
 add_executable(Battle-of-the-Boxes ${SOURCE_FILES}
         src/game/combat/CombatSequence.cpp
         src/game/combat/CombatSequence.h
