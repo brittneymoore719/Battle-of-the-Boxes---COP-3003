@@ -11,4 +11,8 @@ Character& Combatant::getCharacter() {
     return m_character;
 }
 
-void Combatant::act(Character& target) {}
+void Combatant::act(Character& target) {
+
+
+
+}

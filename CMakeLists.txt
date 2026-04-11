@@ -27,6 +27,8 @@ add_executable(Battle-of-the-Boxes ${SOURCE_FILES}
         src/game/combat/combatant/PlayerCombatant.cpp
         src/display/stage/battle/BattleStage.cpp
         src/display/stage/battle/BattleStage.h
+        src/utils/RNG.cpp
+        src/utils/RNG.h
 )
 configure_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/arial.ttf"

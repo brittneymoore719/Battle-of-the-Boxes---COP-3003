@@ -4,13 +4,19 @@
 
 #include "CombatSequence.h"
 
-CombatSequence::CombatSequence(std::array<Combatant, 2> combatants):
+#include "combatant/PlayerCombatant.h"
 
-    m_combatants(combatants),
+CombatSequence::CombatSequence(PlayerCharacter& player, Character& character) {
+
+    PlayerCombatant playerCombatant(player);
+    Combatant defender(character);
+
+    m_combatants({player, character}),
     m_round(0),
     m_turn(0)
 
-{}
+
+}
 
 void CombatSequence::playRound() {
     //get attacker and defender absed on whose turn it is

@@ -9,19 +9,20 @@
 
 #include "combatant/Combatant.h"
 #include "game/entity/Character.h"
+#include "game/entity/player/character/PlayerCharacter.h"
 
 
-enum Action {ATTACK, BLOCK, FEINT, PASS};
+enum Action {ATTACK, DEFEND, FEINT, PASS};
 
 class CombatSequence {
 
 public:
 
-    CombatSequence(std::array<Combatant, 2> combatants);
+    CombatSequence(PlayerCharacter& player, Character& character);
 
     void playRound();
 
-    std::array<Combatant, 2> getCombatants() const;
+    std::array<Combatant, 2>& getCombatants() const;
 
     bool getTurn() const;
 
@@ -30,7 +31,7 @@ public:
 
 private:
 
-    std::array<Combatant, 2> m_combatants;
+    std::array<Combatant, 2>& m_combatants;
 
     bool m_turn;
 

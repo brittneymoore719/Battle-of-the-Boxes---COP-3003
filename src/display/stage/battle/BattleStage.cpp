@@ -11,15 +11,15 @@
 #include "game/entity/Character.h"
 #include "game/Constants.h"
 
-BattleStage::BattleStage() : Stage() {
+BattleStage::BattleStage(CombatSequence& sequence) : Stage(), m_combatSequence(sequence) {
     std::cout << "BattleStage initialized\n";
 }
 
 void BattleStage::update() {
     std::cout << "BattleStage received update call\n";
 
-    double playerHealth{m_player.getStatistic(Statistic::CURRENT_HP)};
-    double enemyHealth{m_enemy.getStatistic(Statistic::CURRENT_HP)};
+    double playerHealth{m_player.getStatistic(CURRENT_HP)};
+    double enemyHealth{m_enemy.getStatistic(CURRENT_HP)};
     std::cout << std::format("player health: {}\nenemy health:{}\n\n", playerHealth, enemyHealth);
 
     if (enemyHealth <= 0) {

@@ -9,15 +9,20 @@
 #include "game/entity/player/character/PlayerCharacter.h"
 #include "game/entity/enemy/Enemy.h"
 #include "game/Enums.h"
+#include "game/combat/CombatSequence.h"
+#include "game/combat/combatant/PlayerCombatant.h"
 
 class BattleStage : public Stage {
 public:
-    BattleStage();
+    BattleStage(CombatSequence& sequence);
     virtual ~BattleStage() = default;
     virtual void update() override;
 private:
+
+    CombatSequence& m_combatSequence;
+
     PlayerCharacter m_player{};
- Enemy m_enemy{"Zombie Worker", EnemyType::ZOMBIE_WORKER};
+    Enemy m_enemy{"Zombie Worker", EnemyType::ZOMBIE_WORKER};
 
 };
 
