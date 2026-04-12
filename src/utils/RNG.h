@@ -10,7 +10,7 @@ class RNG {
 
 public:
 
-    RNG& getInstance();
+    static RNG& getInstance();
 
     int getRandomNumber(int min, int max);
 
@@ -21,7 +21,7 @@ public:
 private:
 
     RNG() = default;
-    static RNG& instance;
+    static RNG instance;
 
     std::random_device m_device;
     std::mt19937 m_engine{m_device()}; // This was recommended by google as a higher quality engine

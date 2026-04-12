@@ -4,6 +4,8 @@
 
 #include "RNG.h"
 
+RNG RNG::instance{};
+
 RNG &RNG::getInstance() {
     return instance;
 }
