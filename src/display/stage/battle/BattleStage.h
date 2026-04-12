@@ -10,13 +10,12 @@
 #include "game/entity/enemy/Enemy.h"
 #include "game/Enums.h"
 #include "game/combat/CombatSequence.h"
-#include "game/combat/combatant/PlayerCombatant.h"
 
 class BattleStage : public Stage {
 public:
     BattleStage(CombatSequence& sequence);
-    virtual ~BattleStage() = default;
-    virtual void update() override;
+    ~BattleStage() override = default;
+    void update() override;
 private:
 
     CombatSequence& m_combatSequence;
