@@ -4,9 +4,10 @@
 #include <SFML/Graphics/Texture.hpp>
 #include "../Constants.h"
 #include "WindowManager.h"
+#include "game/entity/HealthPool.h"
 
 //basic constructor for the Box, this is subject to change
-Character::Character(const std::filesystem::path texturePath) : m_texture(sf::Texture(texturePath)), m_sprite(m_texture) {
+Character::Character(const std::filesystem::path texturePath, int max_hp) : m_texture(sf::Texture(texturePath)), m_healthPool(max_hp),  m_sprite(m_texture) {
     m_sprite.setOrigin(m_sprite.getGlobalBounds().size.componentWiseDiv({2, 2}));
 }
 
@@ -18,6 +19,9 @@ sf::Sprite& Character::getSprite() {
     return m_sprite;
 }
 
+HealthPool& Character::getHealthPool() {
+    return m_healthPool;
+}
 
 
 void Character::draw() {

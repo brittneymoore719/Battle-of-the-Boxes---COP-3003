@@ -5,22 +5,23 @@
 #include <array>
 #include <memory>
 #include <vector>
+#include "game/entity/HealthPool.h"
 
 
 class Character {
     public:
 
-    Character(const std::filesystem::path texturePath);
+    Character(const std::filesystem::path texturePath, int max_hp);
 
     sf::Texture& getTexture();
     sf::Sprite& getSprite();
-
+    HealthPool& getHealthPool();
 
 
     void draw();
 
 private:
-
+    HealthPool m_healthPool;
     sf::Texture m_texture;
     sf::Sprite m_sprite;
 

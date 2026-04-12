@@ -25,9 +25,11 @@ BattleStage::BattleStage(std::vector<std::unique_ptr<Enemy>> enemies,
       m_deck{DeckManager::createDeck()},
       m_selectedCard{-1},
       m_hoveredEnemy{*m_enemies[0]},
+      m_allEnemiesDead{false},
+      m_playerDead{false},
       Stage()
 {
-    m_deck.activateCards(4);
+    m_deck.activateCards(8);
     std::cout << "BattleStage initialized\n";
 }
 
@@ -35,8 +37,21 @@ void BattleStage::update() {
     sf::RenderWindow& window = WindowManager::getWindow();
     m_player->draw();
 
+    m_playerDead = m_player->getHealthPool().isDead();
+    m_allEnemiesDead = true;
     for (const auto& enemy : m_enemies) {
+        if (!enemy->getHealthPool().isDead()) m_allEnemiesDead = false;
         enemy->draw();
+    }
+
+    if (m_allEnemiesDead) {
+        // win
+        std::cout << "win\n";
+        return;
+    } else if (m_playerDead) {
+        // lose
+        std::cout << "lose\n";
+        return;
     }
 
     std::vector<std::shared_ptr<Card>>& cards = m_deck.getCards();
@@ -58,13 +73,12 @@ void BattleStage::update() {
                 if (m_playerHovered)
                     card->use(*m_player, *m_player);
                 else
-                    card->use(m_hoveredEnemy, *m_player);
-                std::cout << "hit\n";
+                    card->use(*m_player, m_hoveredEnemy);
+
                 m_selectedCard = -1;
                 m_deck.deactivateCard(card);
             }
         } else card->draw(i, cards.size());
-
     }
 }
 

@@ -1,11 +1,11 @@
-#ifndef BASICATTACK_H
-#define BASICATTACK_H
+#ifndef BLOCK_H
+#define BLOCK_H
 
 #include "../Card.h"
 
-class BasicAttack : public Card {
+class Block : public Card {
     public:
-    BasicAttack();
+    Block();
     virtual void use(Character& user, Character& target) override;
 };
 
