@@ -36,7 +36,6 @@ void UiButton::update() {
     sf::FloatRect label_text_bounds = label_text.getLocalBounds();
     sf::FloatRect rect_bounds = m_rect.getGlobalBounds();
     label_text.setPosition(rect_bounds.position + rect_bounds.size.componentWiseDiv({2, 2}) - label_text_bounds.size.componentWiseDiv({2, 2}));
-    //label_text.setPosition({m_pos.x + m_size.x/2 - label_text_bounds.size.x/2, m_pos.y + m_size.y/2 - label_text_bounds.size.y/2});
 
     window.draw(m_rect);
     window.draw(label_text);

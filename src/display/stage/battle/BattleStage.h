@@ -36,6 +36,8 @@ private:
 
     Enemy& m_hoveredEnemy;
     bool m_playerHovered;
+    bool m_allEnemiesDead;
+    bool m_playerDead;
 };
 
 #endif //BATTLE_OF_THE_BOXES_BATTLESTAGE_H
