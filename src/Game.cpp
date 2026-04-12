@@ -1,24 +1,21 @@
+#include "Game.h"
+
 #include <iostream>
 
+#include "game/entity/player/character/PlayerCharacter.h"
 #include "SFML/Graphics/RenderWindow.hpp"
 
 // if we truly want a Game object it should be a singleton
 
-class Game{
-public:
+Game Game::instance{};
 
-  static Game& getInstance() {
-    return instance;
-  }
+Game::Game() : m_player(PlayerCharacter()) {
+}
 
-  void start(){
+void Game::start(){
     std::cout << "Game starting..." << std::endl;
-  }
+}
 
-private:
-
-  static Game instance;
-
-  sf::RenderWindow renderWindow{sf::VideoMode({800, 600}), "Battle of the Boxes"};
-
-};
+PlayerCharacter &Game::getPlayer() {
+    return m_player;
+}
