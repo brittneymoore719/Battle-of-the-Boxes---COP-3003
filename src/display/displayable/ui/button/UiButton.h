@@ -1,6 +1,7 @@
 #ifndef UIBUTTON_H
 #define UIBUTTON_H
 
+#include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <string>
 #include "display/Updatable.h"
@@ -15,8 +16,7 @@ class UiButton : Updatable {
         bool m_clicked;
         std::string m_label;
 
-        sf::Vector2f m_pos; // x and y position
-        sf::Vector2f m_size; // width and height
+        sf::RectangleShape m_rect;
 };
 
 #endif

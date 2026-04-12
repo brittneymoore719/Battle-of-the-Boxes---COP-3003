@@ -11,22 +11,21 @@
 #include <iostream>
 #include "WindowManager.h"
 
-UiButton::UiButton(std::string label, sf::Vector2f position, sf::Vector2f size) : m_clicked{false}, m_pos{position}, m_size{size} {
+UiButton::UiButton(std::string label, sf::Vector2f position, sf::Vector2f size) : m_clicked{false}, m_rect{size} {
     m_label = label;
+    m_rect.setOrigin(size.componentWiseDiv({2.0f, 2.0f}));
+    m_rect.setPosition(position);
 }
 
 void UiButton::update() {
     sf::RenderWindow& window = WindowManager::getWindow();
 
-    sf::RectangleShape rect(m_size);
-    rect.setPosition(m_pos);
-
     if (isHovered()) {
-        rect.setFillColor(sf::Color::Green);
+        m_rect.setFillColor(sf::Color::Green);
         m_clicked = sf::Mouse::isButtonPressed(sf::Mouse::Button::Left);
     }
     else
-        rect.setFillColor(sf::Color::Blue);
+        m_rect.setFillColor(sf::Color::Blue);
 
     sf::Text label_text(WindowManager::getFont());
     label_text.setFillColor(sf::Color::Red);
@@ -35,9 +34,11 @@ void UiButton::update() {
 
     // roughly centers the text
     sf::FloatRect label_text_bounds = label_text.getLocalBounds();
-    label_text.setPosition({m_pos.x + m_size.x/2 - label_text_bounds.size.x/2, m_pos.y + m_size.y/2 - label_text_bounds.size.y/2});
+    sf::FloatRect rect_bounds = m_rect.getGlobalBounds();
+    label_text.setPosition(rect_bounds.position + rect_bounds.size.componentWiseDiv({2, 2}) - label_text_bounds.size.componentWiseDiv({2, 2}));
+    //label_text.setPosition({m_pos.x + m_size.x/2 - label_text_bounds.size.x/2, m_pos.y + m_size.y/2 - label_text_bounds.size.y/2});
 
-    window.draw(rect);
+    window.draw(m_rect);
     window.draw(label_text);
 }
 
@@ -46,6 +47,6 @@ bool UiButton::hasBeenClicked() {
 }
 
 bool UiButton::isHovered() {
-    sf::Vector2i mousePos = WindowManager::getMousePos();
-    return (mousePos.x > m_pos.x && mousePos.y > m_pos.y && mousePos.x < m_pos.x + m_size.x && mousePos.y < m_pos.y + m_size.y);
+    sf::Vector2f mousePos = WindowManager::getMousePos();
+    return m_rect.getGlobalBounds().contains(mousePos);
 }
