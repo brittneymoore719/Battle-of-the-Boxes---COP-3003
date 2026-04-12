@@ -3,11 +3,10 @@
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Mouse.hpp>
 #include <iostream>
+#include "game/Constants.h"
 
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 600
 
-sf::RenderWindow WindowManager::m_window = sf::RenderWindow(sf::VideoMode({WINDOW_WIDTH, WINDOW_HEIGHT}), "Battle Of The Boxes");
+sf::RenderWindow WindowManager::m_window = sf::RenderWindow(sf::VideoMode({GameConstants::WINDOW_WIDTH, GameConstants::WINDOW_HEIGHT}), "Battle Of The Boxes");
 sf::Font WindowManager::m_font("arial.ttf");
 
 sf::RenderWindow& WindowManager::getWindow() {
@@ -23,8 +22,8 @@ void WindowManager::handleEvents() {
     }
 }
 
-sf::Vector2i WindowManager::getMousePos() {
-    return sf::Mouse::getPosition(m_window);
+sf::Vector2f WindowManager::getMousePos() {
+    return m_window.mapPixelToCoords(sf::Mouse::getPosition(m_window));
 }
 
 sf::Font& WindowManager::getFont(){

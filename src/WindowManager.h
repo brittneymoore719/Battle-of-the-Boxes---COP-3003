@@ -8,7 +8,7 @@ class WindowManager {
 public:
     static sf::RenderWindow& getWindow();
     static void handleEvents();
-    static sf::Vector2i getMousePos();
+    static sf::Vector2f getMousePos();
     static sf::Font& getFont();
 private:
     static sf::RenderWindow m_window;
