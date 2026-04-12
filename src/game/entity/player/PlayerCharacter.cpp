@@ -13,7 +13,7 @@
 
 PlayerCharacter::PlayerCharacter()
     : Character(
-        "sprites/box.png") {
+        "sprites/box.png", GameConstants::MAX_PLAYER_HEALTH) {
             sf::Sprite& sprite = getSprite();
             sprite.setPosition({GameConstants::PLAYER_POS_X, GameConstants::PLAYER_POS_Y});
             sprite.setScale({GameConstants::PLAYER_SCALE, GameConstants::PLAYER_SCALE});

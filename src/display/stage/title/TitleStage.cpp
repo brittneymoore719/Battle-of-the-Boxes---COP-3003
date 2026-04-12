@@ -19,7 +19,7 @@ void TitleStage::update() {
     if (startButton.hasBeenClicked()) {
         std::cout << "changing stage to BattleStage\n";
         std::vector<std::unique_ptr<Enemy>> enemies;
-        enemies.push_back(std::make_unique<Enemy>(1));
+        enemies.push_back(std::make_unique<Enemy>(1, 20));
 
         auto player = std::make_unique<PlayerCharacter>();
 

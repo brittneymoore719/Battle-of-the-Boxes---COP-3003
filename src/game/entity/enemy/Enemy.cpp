@@ -3,8 +3,8 @@
 #include "game/Constants.h"
 #include "Enemy.h"
 
-Enemy::Enemy(int position, const std::filesystem::path texturePath)
-    : Character(texturePath) {
+Enemy::Enemy(int position, int max_health, const std::filesystem::path texturePath)
+    : Character(texturePath, max_health) {
           setPosition(position);
       }
 
