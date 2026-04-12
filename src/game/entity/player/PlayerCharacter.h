@@ -4,18 +4,12 @@
 
 #ifndef BATTLE_OF_THE_BOXES___COP_3003_PLAYERCHARACTER_H
 #define BATTLE_OF_THE_BOXES___COP_3003_PLAYERCHARACTER_H
-#include "game/entity/GameCharacter.h"
+#include "game/entity/Character.h"
 
 
-class PlayerCharacter : public GameCharacter {
+class PlayerCharacter : public Character {
     public:
-    double getHealth();
-    void handleUserInput();
-    int getUserAction();
     PlayerCharacter();
-
-    private:
-    int m_selectedAction{0};
 };
 
 #endif //BATTLE_OF_THE_BOXES___COP_3003_PLAYERCHARACTER_H

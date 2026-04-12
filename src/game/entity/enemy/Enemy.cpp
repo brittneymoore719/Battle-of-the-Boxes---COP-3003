@@ -1,18 +1,18 @@
 //edited by Brittney Moore 4/6/2026
-#include "../GameCharacter.h"
+#include "../Character.h"
+#include "game/Constants.h"
 #include "Enemy.h"
 
-Enemy::Enemy(std::string name, EnemyType type, double maxHp, double baseDmg, double defense, double accuracy, const std::filesystem::path& texturePath)
-    : GameCharacter(texturePath, maxHp, maxHp, baseDmg, 0.0, defense, 0.0, accuracy),
-      m_name(name),
-      m_type(type){}
+Enemy::Enemy(int position, const std::filesystem::path texturePath)
+    : Character(texturePath) {
+          setPosition(position);
+      }
 
-
-std::string Enemy::getName() const { return m_name; }
-
-bool Enemy::isAlive() const { return getStatistic(CURRENT_HP) > 0; }
-
-EnemyType Enemy::getType() const { return m_type; }
+void Enemy::setPosition(int position) {
+    sf::Sprite& sprite = getSprite();
+    sprite.setPosition({GameConstants::ENEMY_POS_X + GameConstants::ENEMY_GAP * position, GameConstants::ENEMY_POS_Y});
+    sprite.setScale({GameConstants::ENEMY_SCALE, GameConstants::ENEMY_SCALE});
+}
 
 //Enemy-specific logic will be held here
 //enemies will inherit health and movement from the character

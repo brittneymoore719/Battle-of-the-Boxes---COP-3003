@@ -3,32 +3,18 @@
 // Updated by Brittney Moore on 4/7/2026
 
 #include "PlayerCharacter.h"
+#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Graphics/Texture.hpp>
 #include <iostream>
-#include "game/entity/GameCharacter.h"
+#include "WindowManager.h"
+#include "game/entity/Character.h"
 #include "game/Constants.h"
 
 PlayerCharacter::PlayerCharacter()
-    : GameCharacter(
-        "sprites/box.png",
-        GameConstants::MAX_PLAYER_HEALTH,
-        GameConstants::MAX_PLAYER_HEALTH,
-        GameConstants::PLAYER_ATTACK_DAMAGE) {}
-
-double PlayerCharacter::getHealth() {
-    return getStatistic(Statistic::CURRENT_HP);
-}
-
-void PlayerCharacter::handleUserInput() {
-    std::cout << "Enter desired action\n"
-    << "1. attack\n"
-    << "2. dodge\n";
-    char choice{0};
-    std::cin >> choice;
-    choice -= '0';
-
-    m_selectedAction = choice;
-}
-
-int PlayerCharacter::getUserAction() {
-    return m_selectedAction;
-}
+    : Character(
+        "sprites/box.png") {
+            sf::Sprite& sprite = getSprite();
+            sprite.setPosition({GameConstants::PLAYER_POS_X, GameConstants::PLAYER_POS_Y});
+            sprite.setScale({GameConstants::PLAYER_SCALE, GameConstants::PLAYER_SCALE});
+        }
