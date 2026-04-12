@@ -15,7 +15,7 @@ class Character {
 
     sf::Texture& getTexture();
     sf::Sprite& getSprite();
-
+    HealthPool& getHealthPool();
 
 
     void draw();
