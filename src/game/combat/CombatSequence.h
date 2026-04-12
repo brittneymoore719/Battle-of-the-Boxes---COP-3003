@@ -7,22 +7,22 @@
 #include <array>
 #include <cstdint>
 
-#include "combatant/Combatant.h"
-#include "game/entity/Character.h"
-#include "game/entity/player/character/PlayerCharacter.h"
+#include "game/GameObject.h"
 
-
-enum Action {ATTACK, DEFEND, FEINT, PASS};
+class GameCharacter;
+class PlayerCharacter;
 
 class CombatSequence {
 
 public:
 
-    CombatSequence(PlayerCharacter& player, Character& character);
+    CombatSequence(PlayerCharacter& player, GameCharacter& character);
 
     void playRound();
 
-    std::array<Combatant, 2>& getCombatants() const;
+    PlayerCharacter& getPlayer() const;
+
+    GameCharacter& getOpponent() const;
 
     bool getTurn() const;
 
@@ -31,7 +31,11 @@ public:
 
 private:
 
-    std::array<Combatant, 2>& m_combatants;
+    PlayerCharacter& m_player;
+
+    GameCharacter& m_character;
+
+    const std::array<GameCharacter*, 2> m_combatants;
 
     bool m_turn;
 
