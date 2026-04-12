@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include "game/entity/player/character/PlayerCharacter.h"
+#include "game/entity/player/PlayerCharacter.h"
 #include "SFML/Graphics/RenderWindow.hpp"
 
 // if we truly want a Game object it should be a singleton

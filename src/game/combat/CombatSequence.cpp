@@ -4,7 +4,7 @@
 
 #include "CombatSequence.h"
 #include "game/entity/GameCharacter.h"
-#include "game/entity/player/character/PlayerCharacter.h"
+#include "../entity/player/PlayerCharacter.h"
 
 CombatSequence::CombatSequence(PlayerCharacter& player, GameCharacter& character) :
 
