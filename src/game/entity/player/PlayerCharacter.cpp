@@ -2,7 +2,7 @@
 // Created by Ethan Pedrick on 4/1/26.
 // Updated by Brittney Moore on 4/7/2026
 
-#include "character/PlayerCharacter.h"
+#include "PlayerCharacter.h"
 #include <iostream>
 #include "game/entity/GameCharacter.h"
 #include "game/Constants.h"

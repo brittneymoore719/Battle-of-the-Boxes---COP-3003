@@ -4,7 +4,7 @@
 
 #ifndef BATTLE_OF_THE_BOXES_GAME_H
 #define BATTLE_OF_THE_BOXES_GAME_H
-M#include "game/entity/player/PlayerCharacter.h"
+#include "game/entity/player/PlayerCharacter.h"
 
 class PlayerCharacter;
 
