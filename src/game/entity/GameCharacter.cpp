@@ -31,8 +31,23 @@ void GameCharacter::update() {
 
 }
 
-void GameCharacter::takeDamage(double damageAmount) {
-    m_statistics[Statistic::CURRENT_HP] -= damageAmount;
+bool GameCharacter::isBlocking() const {
+    return m_isBlocking;
+}
+
+/**
+ * @author Ethan Pedrick
+ * @param damageAmount amount of damage the character is meant to take
+ * @return true if the character is defeated by the damage
+ *
+ */
+bool GameCharacter::takeDamage(double damageAmount) {
+
+    if (damageAmount <= 0) return false;
+
+    m_statistics[CURRENT_HP] -= damageAmount;
+
+    return m_statistics[CURRENT_HP] <= 0;
 }
 
 GameAction& GameCharacter::act(GameCharacter& target) {

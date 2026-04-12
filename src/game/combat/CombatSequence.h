@@ -28,6 +28,8 @@ public:
 
     int getRound() const;
 
+    bool willContinue() const;
+
 
 private:
 
@@ -40,6 +42,8 @@ private:
     bool m_turn;
 
     int m_round;
+
+    bool m_willContinue;
 
 };
 

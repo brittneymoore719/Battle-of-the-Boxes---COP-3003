@@ -39,3 +39,9 @@ void CombatSequence::playRound() {
     m_round++;
 
 }
+
+bool CombatSequence::willContinue() const {
+
+    return m_willContinue;
+
+}

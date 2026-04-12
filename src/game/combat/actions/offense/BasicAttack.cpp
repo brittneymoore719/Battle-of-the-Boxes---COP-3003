@@ -10,6 +10,19 @@ BasicAttack::BasicAttack(GameCharacter& user, GameCharacter& target):
 
 }
 
-void BasicAttack::apply() {
-    getTarget().takeDamage(getUser().getStatistic(BASE_DMG));
+bool BasicAttack::apply() {
+
+    double damage = getUser().getStatistic(BASE_DMG);
+
+    double reduction = 0.0;
+
+    if (getTarget().isBlocking()) {
+
+        reduction = getTarget().getStatistic(DEFENSE);
+
+    }
+
+    damage -= reduction * 0.5;
+
+    return getTarget().takeDamage(damage);
 }

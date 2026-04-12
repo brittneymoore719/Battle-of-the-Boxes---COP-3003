@@ -30,7 +30,10 @@ class GameCharacter : public GameObject {
         );
 
     double getStatistic(Statistic stat) const;
-    void takeDamage(double damageAmount);
+
+    bool isBlocking() const;
+
+    bool takeDamage(double damageAmount);
 
     void update();
 

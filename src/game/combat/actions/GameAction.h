@@ -23,8 +23,11 @@ class GameAction {
 
     void setName(const std::string &name);
 
-
-    virtual void apply() = 0;
+    /**
+     * @author: Ethan Pedrick
+     * @return if the action should end the current CombatSequence.
+     */
+    virtual bool apply() = 0;
 
     private:
 
