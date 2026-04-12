@@ -3,18 +3,20 @@
 #ifndef BATTLE_OF_THE_BOXES___COP_3003_CHARACTER_H
 #define BATTLE_OF_THE_BOXES___COP_3003_CHARACTER_H
 #include <SFML/Graphics/Texture.hpp>
-#include <array>
 #include <vector>
 
 #include "../GameObject.h"
 
+// to stop it from looping imports
+class GameAction;
+
 enum Statistic{MAX_HP, CURRENT_HP, BASE_DMG, PIERCE, DEFENSE, DODGE, ACCURACY, CRIT_CHANCE, CRIT_MULTIPLIER};
 
-class Character : public GameObject {
+class GameCharacter : public GameObject {
     public:
 
-    Character(
-        const std::filesystem::path texturePath,
+    explicit GameCharacter(
+        const std::filesystem::path& texturePath,
         double maxHp = 20.0,
         double currentHp = 20.0,
         double baseDmg = 5.0,
@@ -31,6 +33,8 @@ class Character : public GameObject {
     void takeDamage(double damageAmount);
 
     void update();
+
+    GameAction& act(GameCharacter& target);
 
 private:
 

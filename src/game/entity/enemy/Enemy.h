@@ -2,11 +2,11 @@
 
 #ifndef BATTLE_OF_THE_BOXES___COP_3003_ENEMY_H
 #define BATTLE_OF_THE_BOXES___COP_3003_ENEMY_H
-#include "../Character.h"
+#include "../GameCharacter.h"
 #include "../../Enums.h"
 #include <string>
 
-class Enemy : public Character {
+class Enemy : public GameCharacter {
 public:
     Enemy(std::string name,
         EnemyType type,

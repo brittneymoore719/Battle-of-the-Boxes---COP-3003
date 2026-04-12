@@ -1,9 +1,11 @@
-#include "Character.h"
+#include "GameCharacter.h"
 #include <SFML/Graphics/Texture.hpp>
 
+#include "game/combat/GameAction.h"
+
 //basic constructor for the Box, this is subject to change
-Character::Character(
-    const std::filesystem::path texturePath,
+GameCharacter::GameCharacter(
+    const std::filesystem::path& texturePath,
         double maxHp,
         double currentHp,
         double baseDmg,
@@ -16,19 +18,25 @@ Character::Character(
     ) : texture(texturePath), m_statistics({maxHp, currentHp, baseDmg, pierce, defense, dodge, accuracy, critChance, critMultiplier}) {}
 
 
-double Character::getStatistic(Statistic stat) const {
+double GameCharacter::getStatistic(Statistic stat) const {
 
     return m_statistics.at(stat);
 
 }
 
 
-void Character::update() {
+void GameCharacter::update() {
 
 
 
 }
 
-void Character::takeDamage(double damageAmount) {
+void GameCharacter::takeDamage(double damageAmount) {
     m_statistics[Statistic::CURRENT_HP] -= damageAmount;
+}
+
+GameAction& GameCharacter::act(GameCharacter& target) {
+
+
+
 }
