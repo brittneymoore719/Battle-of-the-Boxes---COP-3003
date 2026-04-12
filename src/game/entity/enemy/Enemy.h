@@ -8,7 +8,7 @@
 class Enemy : public Character {
 public:
     Enemy(int position,
-        const std::filesystem::path texturePath = "sprites/box.png"
+        const std::filesystem::path texturePath = "sprites/zombie_worker.png"
     );
 
     void setPosition(int position);
