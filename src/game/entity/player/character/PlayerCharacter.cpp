@@ -4,11 +4,11 @@
 
 #include "PlayerCharacter.h"
 #include <iostream>
-#include "game/entity/Character.h"
+#include "game/entity/GameCharacter.h"
 #include "game/Constants.h"
 
 PlayerCharacter::PlayerCharacter()
-    : Character(
+    : GameCharacter(
         "sprites/box.png",
         GameConstants::MAX_PLAYER_HEALTH,
         GameConstants::MAX_PLAYER_HEALTH,
@@ -26,16 +26,9 @@ void PlayerCharacter::handleUserInput() {
     std::cin >> choice;
     choice -= '0';
 
-    if (choice == 2) m_dodged = true;
-    else m_dodged = false;
-
     m_selectedAction = choice;
 }
 
 int PlayerCharacter::getUserAction() {
     return m_selectedAction;
-}
-
-bool PlayerCharacter::dodged() {
-    return m_dodged;
 }
