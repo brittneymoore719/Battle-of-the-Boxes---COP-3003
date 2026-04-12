@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 
-Block::Block(): Card("Block", "block 5 damage") {
+Block::Block(): Card("Block", "block 5\ndamage") {
 
 }
 

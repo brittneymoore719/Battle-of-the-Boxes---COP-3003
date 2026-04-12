@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <memory>
+#include <SFML/Graphics/Text.hpp>
 #include "deck/Deck.h"
 #include "display/stage/Stage.h"
 #include "../../../game/entity/player/PlayerCharacter.h"
@@ -15,10 +16,6 @@
 
 class BattleStage : public Stage {
 public:
-    // Default constructor: creates one default enemy and a default player
-    BattleStage();
-
-    // Constructor taking ownership of enemies and player via unique_ptr
     BattleStage(std::vector<std::unique_ptr<Enemy>> enemies,
                 std::unique_ptr<PlayerCharacter> player);
 
@@ -38,6 +35,12 @@ private:
     bool m_playerHovered;
     bool m_allEnemiesDead;
     bool m_playerDead;
+    int m_cardsPlayed;
+    sf::Text m_drawCounterText;
+    void updateDrawCounterDisplay();
+    void refreshHand();
+
+    bool m_wasMousePressed;   // added to prevent actions from repeating when the mouse is held down
 };
 
 #endif //BATTLE_OF_THE_BOXES_BATTLESTAGE_H

@@ -4,6 +4,7 @@
 #include "display/stagecontroller/StageController.h"
 #include "../../displayable/ui/button/UiButton.h"
 #include "game/Constants.h"
+#include "game/entity/enemy/Zombie.h"
 #include <iostream>
 #include <memory>
 #include <vector>
@@ -19,7 +20,7 @@ void TitleStage::update() {
     if (startButton.hasBeenClicked()) {
         std::cout << "changing stage to BattleStage\n";
         std::vector<std::unique_ptr<Enemy>> enemies;
-        enemies.push_back(std::make_unique<Enemy>(1, 15.f));
+        enemies.push_back(std::make_unique<Zombie>(1));
 
         auto player = std::make_unique<PlayerCharacter>();
 

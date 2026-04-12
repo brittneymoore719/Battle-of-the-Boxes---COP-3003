@@ -13,6 +13,8 @@ public:
 
     void setPosition(int position);
 
+    virtual void attack(Character& target) = 0;
+
     private:
     std::string m_name;
 };

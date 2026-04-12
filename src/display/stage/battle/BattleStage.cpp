@@ -17,7 +17,6 @@
 #include "game/entity/player/PlayerCharacter.h"
 
 
-// Main constructor: takes ownership via unique_ptr
 BattleStage::BattleStage(std::vector<std::unique_ptr<Enemy>> enemies,
                          std::unique_ptr<PlayerCharacter> player)
     : m_enemies(std::move(enemies)),
@@ -27,14 +26,28 @@ BattleStage::BattleStage(std::vector<std::unique_ptr<Enemy>> enemies,
       m_hoveredEnemy{*m_enemies[0]},
       m_allEnemiesDead{false},
       m_playerDead{false},
+      m_cardsPlayed{0},
+      m_wasMousePressed{false},
+      m_drawCounterText(WindowManager::getFont()),
       Stage()
 {
     m_deck.activateCards(8);
+    m_drawCounterText.setFont(WindowManager::getFont());
+    m_drawCounterText.setCharacterSize(20);
+    m_drawCounterText.setFillColor(sf::Color::White);
+    m_drawCounterText.setPosition({10.f, 10.f});
+    updateDrawCounterDisplay();
+
     std::cout << "BattleStage initialized\n";
 }
 
 void BattleStage::update() {
     sf::RenderWindow& window = WindowManager::getWindow();
+
+    bool mouseCurrentlyPressed = sf::Mouse::isButtonPressed(sf::Mouse::Button::Left);
+    bool mouseJustPressed = mouseCurrentlyPressed && !m_wasMousePressed;
+    m_wasMousePressed = mouseCurrentlyPressed;
+
     m_player->draw();
 
     m_playerDead = m_player->getHealthPool().isDead();
@@ -45,22 +58,20 @@ void BattleStage::update() {
     }
 
     if (m_allEnemiesDead) {
-        // win
         std::cout << "win\n";
         return;
     } else if (m_playerDead) {
-        // lose
         std::cout << "lose\n";
         return;
     }
 
     std::vector<std::shared_ptr<Card>>& cards = m_deck.getCards();
 
-    for (int i = 0; i < cards.size(); ++i) {
+    for (int i = 0; i < static_cast<int>(cards.size()); ++i) {
         std::shared_ptr<Card> card = cards.at(i);
 
         if (card->isHovered() && m_selectedCard == -1) {
-            if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) {
+            if (mouseJustPressed) {
                 m_selectedCard = i;
             }
         }
@@ -69,7 +80,7 @@ void BattleStage::update() {
             sf::Vector2f mousePos = WindowManager::getMousePos();
             card->drawFloating(mousePos);
 
-            if (isCharacterHovered() && sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) {
+            if (isCharacterHovered() && mouseJustPressed) {
                 if (m_playerHovered)
                     card->use(*m_player, *m_player);
                 else
@@ -77,9 +88,26 @@ void BattleStage::update() {
 
                 m_selectedCard = -1;
                 m_deck.deactivateCard(card);
+                m_cardsPlayed += 1;
+
+
+                if (m_cardsPlayed % 3 == 0) {
+                    refreshHand();
+                    m_selectedCard = -1;
+                    for (auto& enemy : m_enemies) {
+                        enemy->attack(*m_player);
+                    }
+                }
+                updateDrawCounterDisplay();
+
+                break;
             }
-        } else card->draw(i, cards.size());
+        } else {
+            card->draw(i, cards.size());
+        }
     }
+
+    window.draw(m_drawCounterText);
 }
 
 bool BattleStage::isCharacterHovered() {
@@ -99,4 +127,22 @@ bool BattleStage::isCharacterHovered() {
         m_playerHovered = false;
     }
     return false;
+}
+
+void BattleStage::updateDrawCounterDisplay() {
+    int remaining = 3 - (m_cardsPlayed % 3);
+    m_drawCounterText.setString("actions left: " + std::to_string(remaining));
+}
+
+void BattleStage::refreshHand() {
+    std::vector<std::shared_ptr<Card>> active = m_deck.getCards();
+    for (auto& card : active) {
+        m_deck.deactivateCard(card);
+    }
+
+    if (m_deck.getInactiveCount() < 8) {
+        m_deck.reshuffleDiscard();
+    }
+
+    m_deck.activateCards(8);
 }
