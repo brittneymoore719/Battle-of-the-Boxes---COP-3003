@@ -4,8 +4,9 @@
 #include <memory>
 #include <random>
 #include "cards/BasicAttack.h"
+#include "cards/Block.h"
 
-std::vector<std::shared_ptr<Card>> DeckManager::m_cards = {std::make_shared<BasicAttack>(), std::make_shared<BasicAttack>(), std::make_shared<BasicAttack>(), std::make_shared<BasicAttack>()};
+std::vector<std::shared_ptr<Card>> DeckManager::m_cards = {std::make_shared<BasicAttack>(), std::make_shared<BasicAttack>(), std::make_shared<BasicAttack>(), std::make_shared<BasicAttack>(), std::make_shared<Block>(), std::make_shared<Block>(), std::make_shared<Block>(), std::make_shared<Block>()};
 
 std::vector<std::shared_ptr<Card>>& DeckManager::getCards() {
     return m_cards;

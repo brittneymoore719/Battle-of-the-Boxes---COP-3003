@@ -29,7 +29,7 @@ BattleStage::BattleStage(std::vector<std::unique_ptr<Enemy>> enemies,
       m_playerDead{false},
       Stage()
 {
-    m_deck.activateCards(4);
+    m_deck.activateCards(8);
     std::cout << "BattleStage initialized\n";
 }
 

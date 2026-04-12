@@ -8,6 +8,8 @@ class HealthPool {
     explicit HealthPool(double max_hp);
     void takeDamage(double damageAmount);
     bool isDead();
+    void resetBlock();
+    void addBlock(double blockAmount);
 
     void draw(sf::Vector2f display_position);
 
