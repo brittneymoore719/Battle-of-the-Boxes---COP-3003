@@ -6,7 +6,7 @@
 class BasicAttack : public Card {
     public:
     BasicAttack();
-    virtual void use(Character& user, Character& target) override;
+    void use(Character& user, Character& target) override;
 };
 
 #endif
