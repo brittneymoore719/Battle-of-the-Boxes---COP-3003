@@ -20,7 +20,7 @@ file(GLOB_RECURSE
 )
 
 file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/src/sprites"
-     DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/")
+     DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/bin")
 
 
 add_executable(Battle-of-the-Boxes ${SOURCE_FILES}
@@ -36,7 +36,7 @@ add_executable(Battle-of-the-Boxes ${SOURCE_FILES}
 )
 configure_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/arial.ttf"
-    "${CMAKE_CURRENT_BINARY_DIR}/arial.ttf"
+    "${CMAKE_CURRENT_BINARY_DIR}/bin/arial.ttf"
     COPYONLY
 )
 

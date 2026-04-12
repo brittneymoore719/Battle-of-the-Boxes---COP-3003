@@ -8,12 +8,13 @@
 
 class Enemy : public Character {
 public:
-    Enemy(std::string name, 
+    Enemy(std::string name,
         EnemyType type,
-        double maxHp = 30, 
-        double baseDmg = 8.0, 
+        double maxHp = 30,
+        double baseDmg = 8.0,
         double defense = 0.5,
-        double accuracy = 0.7
+        double accuracy = 0.7,
+        const std::filesystem::path texturePath = "sprites/box.png"
     );
 
     std::string getName() const;
