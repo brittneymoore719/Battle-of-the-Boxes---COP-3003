@@ -5,7 +5,7 @@
 #include <array>
 #include <memory>
 #include <vector>
-#include "game/entity/HealthPool.h"
+#include "stats/HealthPool.h"
 
 
 class Character {
