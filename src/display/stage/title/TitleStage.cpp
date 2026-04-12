@@ -5,6 +5,8 @@
 #include "uiElements/UiButton.h"
 #include <iostream>
 
+#include "Game.h"
+
 TitleStage::TitleStage() : Stage(), startButton{"Start Game", {200,200}, {300,150}} {
     std::cout << "TitleStage initialized\n";
 }
@@ -15,6 +17,13 @@ void TitleStage::update() {
     // change stage if start button was pressed
     if (startButton.hasBeenClicked()) {
         std::cout << "changing stage to BattleStage\n";
-        StageController::changeStage(new BattleStage());
+
+        Enemy enemy{"Zombie Worker", EnemyType::ZOMBIE_WORKER};
+
+        CombatSequence sequence{Game::getInstance().getPlayer(), enemy};
+
+        BattleStage stage{sequence};
+
+        StageController::changeStage(&stage);
     }
 }
