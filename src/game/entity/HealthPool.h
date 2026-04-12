@@ -6,6 +6,8 @@
 class HealthPool {
     public:
     explicit HealthPool(int max_hp);
+    void takeDamage(int damageAmount);
+    bool isDead();
 
     void draw(sf::Vector2f display_position);
 
