@@ -1,4 +1,4 @@
-#include "game/combat/GameAction.h"
+#include "../GameAction.h"
 
 class BasicAttack : public GameAction {
     public:

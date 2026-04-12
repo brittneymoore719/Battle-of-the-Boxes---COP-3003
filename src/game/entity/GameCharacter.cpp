@@ -1,7 +1,7 @@
 #include "GameCharacter.h"
 #include <SFML/Graphics/Texture.hpp>
 
-#include "game/combat/GameAction.h"
+#include "../combat/actions/GameAction.h"
 
 //basic constructor for the Box, this is subject to change
 GameCharacter::GameCharacter(

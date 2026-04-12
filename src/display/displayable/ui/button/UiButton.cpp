@@ -1,4 +1,6 @@
+
 #include "UiButton.h"
+
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>

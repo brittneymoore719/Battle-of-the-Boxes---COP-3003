@@ -2,7 +2,7 @@
 #include "../GameCharacter.h"
 #include "Enemy.h"
 
-Enemy::Enemy(std::string name, EnemyType type, double maxHp, double baseDmg, double defense, double accuracy, const std::filesystem::path texturePath)
+Enemy::Enemy(std::string name, EnemyType type, double maxHp, double baseDmg, double defense, double accuracy, const std::filesystem::path& texturePath)
     : GameCharacter(texturePath, maxHp, maxHp, baseDmg, 0.0, defense, 0.0, accuracy),
       m_name(name),
       m_type(type){}

@@ -2,7 +2,7 @@
 #include "display/stage/battle/BattleStage.h"
 #include "display/stage/Stage.h"
 #include "display/stagecontroller/StageController.h"
-#include "uiElements/UiButton.h"
+#include "../../displayable/ui/button/UiButton.h"
 #include <iostream>
 
 #include "Game.h"

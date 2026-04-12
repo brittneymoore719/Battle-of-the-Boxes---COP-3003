@@ -14,7 +14,7 @@ public:
         double baseDmg = 8.0,
         double defense = 0.5,
         double accuracy = 0.7,
-        const std::filesystem::path texturePath = "sprites/box.png"
+        const std::filesystem::path& texturePath = "sprites/zombie_worker.png"
     );
 
     std::string getName() const;

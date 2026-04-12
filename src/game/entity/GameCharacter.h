@@ -38,6 +38,8 @@ class GameCharacter : public GameObject {
 
 private:
 
+    bool m_isBlocking;
+
     std::vector<double> m_statistics;
     sf::Texture texture;
 

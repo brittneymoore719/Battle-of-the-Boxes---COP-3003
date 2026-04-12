@@ -3,12 +3,12 @@
 
 #include <SFML/System/Vector2.hpp>
 #include <string>
-#include "UiElement.h"
+#include "display/Updatable.h"
 
-class UiButton : UiElement {
+class UiButton : Updatable {
     public:
         UiButton(std::string label, sf::Vector2f position, sf::Vector2f size);
-        virtual void update() override;
+        void update() override;
         bool hasBeenClicked();
         bool isHovered();
     private:
