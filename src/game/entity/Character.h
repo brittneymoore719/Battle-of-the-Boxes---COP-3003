@@ -15,15 +15,12 @@ class Character {
     sf::Texture& getTexture();
     sf::Sprite& getSprite();
 
-    void draw();
 
-    //GameAction& act(GameCharacter& target);
+
+    void draw();
 
 private:
 
-    //bool m_isBlocking;
-
-    //std::vector<double> m_statistics;
     sf::Texture m_texture;
     sf::Sprite m_sprite;
 

@@ -10,6 +10,7 @@ class Card {
     void draw(int position, int cardCount);
     bool isHovered();
     void drawFloating(sf::Vector2f newPos);
+    void drawInternals();
 
     virtual void use(Character& user, Character& target) = 0;
 
