@@ -2,6 +2,7 @@
 
 #ifndef BATTLE_OF_THE_BOXES___COP_3003_CHARACTER_H
 #define BATTLE_OF_THE_BOXES___COP_3003_CHARACTER_H
+#include <SFML/Graphics/Texture.hpp>
 #include <array>
 #include <vector>
 
@@ -13,7 +14,7 @@ class Character : public GameObject {
     public:
 
     Character(
-
+        const std::filesystem::path texturePath,
         double maxHp = 20.0,
         double currentHp = 20.0,
         double baseDmg = 5.0,
@@ -34,6 +35,7 @@ class Character : public GameObject {
 private:
 
     std::vector<double> m_statistics;
+    sf::Texture texture;
 
 };
 

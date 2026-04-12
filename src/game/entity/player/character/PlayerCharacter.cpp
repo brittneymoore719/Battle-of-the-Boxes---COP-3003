@@ -9,6 +9,7 @@
 
 PlayerCharacter::PlayerCharacter()
     : Character(
+        "sprites/box.png",
         GameConstants::MAX_PLAYER_HEALTH,
         GameConstants::MAX_PLAYER_HEALTH,
         GameConstants::PLAYER_ATTACK_DAMAGE) {}
