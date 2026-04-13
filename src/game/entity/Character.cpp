@@ -2,7 +2,7 @@
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
-#include "../Constants.h"
+#include <SFML/System/Vector2.hpp>
 #include "WindowManager.h"
 #include "stats/HealthPool.h"
 
@@ -27,4 +27,5 @@ HealthPool& Character::getHealthPool() {
 void Character::draw() {
     sf::RenderWindow& window{WindowManager::getWindow()};
     window.draw(m_sprite);
+    m_healthPool.draw(m_sprite.getPosition() + sf::Vector2f{m_sprite.getLocalBounds().size.x/2, -100.0f});
 }
