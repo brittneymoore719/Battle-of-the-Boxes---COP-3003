@@ -23,7 +23,7 @@ BattleStage::BattleStage(std::vector<std::unique_ptr<Enemy>> enemies,
       m_player(std::move(player)),
       m_deck{DeckManager::createDeck()},
       m_selectedCard{-1},
-      m_hoveredEnemy{*m_enemies[0]},
+      m_hoveredEnemy{nullptr},
       m_allEnemiesDead{false},
       m_playerDead{false},
       m_cardsPlayed{0},
@@ -57,13 +57,13 @@ void BattleStage::update() {
         enemy->draw();
     }
 
-    if (m_allEnemiesDead) 
+    if (m_allEnemiesDead)
     {
     m_drawCounterText.setString("You win!");
     window.draw(m_drawCounterText);
     return;
-    } 
-    else if (m_playerDead) 
+    }
+    else if (m_playerDead)
     {
     m_drawCounterText.setString("You lose!");
     window.draw(m_drawCounterText);

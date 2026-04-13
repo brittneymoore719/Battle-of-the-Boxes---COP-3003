@@ -16,7 +16,6 @@ void HealthPool::takeDamage(double damageAmount) {
     if (m_block < 0) m_block = 0;
 
     m_current_health -= damageAmount;
-    std::cout << "hp: " << m_current_health << "\n";
 }
 
 void HealthPool::addBlock(double blockAmount) {
