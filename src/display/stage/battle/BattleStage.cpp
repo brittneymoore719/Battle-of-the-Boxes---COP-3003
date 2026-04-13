@@ -48,16 +48,23 @@ void BattleStage::update() {
     bool mouseJustPressed = mouseCurrentlyPressed && !m_wasMousePressed;
     m_wasMousePressed = mouseCurrentlyPressed;
 
-    m_player->draw();
+   m_player->draw();
+m_player->getHealthPool().draw({
+    m_player->getSprite().getPosition().x - 30.f,
+    m_player->getSprite().getPosition().y - 60.f
+});
 
-    m_playerDead = m_player->getHealthPool().isDead();
-    m_allEnemiesDead = true;
-    for (const auto& enemy : m_enemies) {
-        if (!enemy->getHealthPool().isDead()) m_allEnemiesDead = false;
-        enemy->draw();
-    }
-
-    if (m_allEnemiesDead) 
+m_playerDead = m_player->getHealthPool().isDead();
+m_allEnemiesDead = true;
+for (const auto& enemy : m_enemies) {
+    if (!enemy->getHealthPool().isDead()) m_allEnemiesDead = false;
+    enemy->draw();
+    enemy->getHealthPool().draw({
+        enemy->getSprite().getPosition().x - 30.f,
+        enemy->getSprite().getPosition().y - 60.f
+    });
+}
+if (m_allEnemiesDead)  
     {
     m_drawCounterText.setString("You win!");
     window.draw(m_drawCounterText);
@@ -122,7 +129,7 @@ bool BattleStage::isCharacterHovered() {
     for (std::unique_ptr<Enemy>& enemy : m_enemies) {
         if (enemy->getSprite().getGlobalBounds().contains(mousePos)) {
             m_hoveredEnemy = enemy.get();
-            m_playerHovered = false;;
+            m_playerHovered = false;
             return true;
         }
     }
