@@ -141,8 +141,13 @@ void BattleStage::updateDrawCounterDisplay() {
 
 void BattleStage::refreshHand() {
     std::vector<std::shared_ptr<Card>> active = m_deck.getCards();
+
     for (auto& card : active) {
         m_deck.deactivateCard(card);
+    }
+
+    if (m_deck.getInactiveCount() == 0) {
+        return;
     }
 
     if (m_deck.getInactiveCount() < 8) {
