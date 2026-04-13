@@ -57,12 +57,17 @@ void BattleStage::update() {
         enemy->draw();
     }
 
-    if (m_allEnemiesDead) {
-        std::cout << "win\n";
-        return;
-    } else if (m_playerDead) {
-        std::cout << "lose\n";
-        return;
+    if (m_allEnemiesDead) 
+    {
+    m_drawCounterText.setString("You win!");
+    window.draw(m_drawCounterText);
+    return;
+    } 
+    else if (m_playerDead) 
+    {
+    m_drawCounterText.setString("You lose!");
+    window.draw(m_drawCounterText);
+    return;
     }
 
     std::vector<std::shared_ptr<Card>>& cards = m_deck.getCards();
