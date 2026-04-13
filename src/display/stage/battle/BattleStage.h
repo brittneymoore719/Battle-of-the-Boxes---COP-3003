@@ -31,7 +31,7 @@ private:
     Deck m_deck;
     int m_selectedCard;
 
-    Enemy& m_hoveredEnemy;
+    Enemy* m_hoveredEnemy;
     bool m_playerHovered;
     bool m_allEnemiesDead;
     bool m_playerDead;
