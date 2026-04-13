@@ -9,8 +9,12 @@ Deck::Deck(std::vector<std::shared_ptr<Card>>& cards) {
     }
 }
 
-void Deck::activateCards(int numCards) {
-    for (int i = 0; i < numCards; ++i) {
+void Deck::activateCards(int numCards) 
+{
+    int cardsToActivate = std::min(numCards, static_cast<int>(m_inactiveCards.size()));
+
+    for (int i = 0; i < cardsToActivate; ++i) 
+    {
         m_activeCards.push_back(m_inactiveCards.front());
         m_inactiveCards.pop();
     }
