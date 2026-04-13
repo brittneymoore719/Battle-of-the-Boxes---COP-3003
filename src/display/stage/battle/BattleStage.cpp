@@ -88,8 +88,7 @@ void BattleStage::update() {
             if (isCharacterHovered() && mouseJustPressed) {
                 if (m_playerHovered)
                     card->use(*m_player, *m_player);
-                else
-                    card->use(*m_player, m_hoveredEnemy);
+                else if (m_hoveredEnemy != nullptr) card->use(*m_player, *m_hoveredEnemy);
 
                 m_selectedCard = -1;
                 m_deck.deactivateCard(card);
@@ -117,10 +116,13 @@ void BattleStage::update() {
 
 bool BattleStage::isCharacterHovered() {
     sf::Vector2f mousePos = WindowManager::getMousePos();
+  m_hoveredEnemy = nullptr;
+  m_playerHovered = false;
 
     for (std::unique_ptr<Enemy>& enemy : m_enemies) {
         if (enemy->getSprite().getGlobalBounds().contains(mousePos)) {
-            m_hoveredEnemy = *enemy;
+            m_hoveredEnemy = enemy.get();
+            m_playerHovered = false;;
             return true;
         }
     }
