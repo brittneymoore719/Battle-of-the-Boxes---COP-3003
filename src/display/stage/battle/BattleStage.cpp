@@ -82,32 +82,41 @@ void BattleStage::update() {
         }
 
         if (m_selectedCard == i) {
-            sf::Vector2f mousePos = WindowManager::getMousePos();
-            card->drawFloating(mousePos);
+    sf::Vector2f mousePos = WindowManager::getMousePos();
+    card->drawFloating(mousePos);
 
-            if (isCharacterHovered() && mouseJustPressed) {
-                if (m_playerHovered)
-                    card->use(*m_player, *m_player);
-                else
-                    card->use(*m_player, m_hoveredEnemy);
-
-                m_selectedCard = -1;
-                m_deck.deactivateCard(card);
-                m_cardsPlayed += 1;
-
-
-                if (m_cardsPlayed % 3 == 0) {
-                    refreshHand();
-                    m_selectedCard = -1;
-                    for (auto& enemy : m_enemies) {
-                        enemy->attack(*m_player);
-                    }
-                }
-                updateDrawCounterDisplay();
-
-                break;
-            }
+    if (isCharacterHovered() && mouseJustPressed) {
+        if (m_playerHovered) {
+            card->use(*m_player, *m_player);
         } else {
+            card->use(*m_player, m_hoveredEnemy);
+        }
+
+        m_deck.deactivateCard(card);
+        m_selectedCard = -1;
+        m_cardsPlayed += 1;
+
+        m_playerDead = m_player->getHealthPool().isDead();
+        m_allEnemiesDead = true;
+        for (const auto& enemy : m_enemies) {
+            if (!enemy->getHealthPool().isDead()) {
+                m_allEnemiesDead = false;
+            }
+        }
+
+        if (!m_playerDead && !m_allEnemiesDead && m_cardsPlayed % 3 == 0) {
+            refreshHand();
+            for (auto& enemy : m_enemies) {
+                if (!enemy->getHealthPool().isDead()) {
+                    enemy->attack(*m_player);
+                }
+            }
+        }
+
+        updateDrawCounterDisplay();
+        break;
+    }
+} else {
             card->draw(i, cards.size());
         }
     }
