@@ -16,6 +16,6 @@ Deck DeckManager::createDeck() {
     static std::random_device rd;
     static std::default_random_engine g(rd());
 
-    std::shuffle(m_cards.begin(), m_cards.begin(), g);
+    std::shuffle(m_cards.begin(), m_cards.end(), g);
     return Deck(m_cards);
 }
