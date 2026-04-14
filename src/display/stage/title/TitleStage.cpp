@@ -8,8 +8,12 @@
 #include <iostream>
 #include <memory>
 #include <vector>
+#include "WindowManager.h"
 
-TitleStage::TitleStage() : Stage(), startButton{"Start Game", {GameConstants::WINDOW_WIDTH / 2.f, GameConstants::WINDOW_HEIGHT / 4.f * 3.f}, {GameConstants::WINDOW_WIDTH / 2.f,GameConstants::WINDOW_HEIGHT / 4.f}} {
+TitleStage::TitleStage() : Stage(), startButton{"Start Game", {GameConstants::WINDOW_WIDTH / 2.f, GameConstants::WINDOW_HEIGHT / 4.f * 3.f}, {GameConstants::WINDOW_WIDTH / 2.f,GameConstants::WINDOW_HEIGHT / 4.f}} 
+  {GameConstants::WINDOW_WIDTH / 2.f, GameConstants::WINDOW_HEIGHT / 4.f}},
+      exitButton{"Exit", {GameConstants::WINDOW_WIDTH / 2.f, GameConstants::WINDOW_HEIGHT / 4.f * 3.f + 80.f},
+{
     std::cout << "TitleStage initialized\n";
 }
 
@@ -26,5 +30,10 @@ void TitleStage::update() {
 
 
         StageController::changeStage(new BattleStage(std::move(enemies), std::move(player)));
+    }
+
+    if (exitButton.hasBeenClicked()) 
+    {
+        WindowManager::getWindow().close();
     }
 }
