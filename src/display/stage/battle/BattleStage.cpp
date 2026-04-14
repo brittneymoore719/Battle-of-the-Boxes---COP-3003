@@ -40,12 +40,17 @@ BattleStage::BattleStage(std::vector<std::unique_ptr<Enemy>> enemies,
     m_drawCounterText.setFillColor(sf::Color::White);
     m_drawCounterText.setPosition({10.f, 10.f});
     updateDrawCounterDisplay();
-
+    m_backgroundTexture = sf::Texture("sprites/battle_background.jpg");
+    m_backgroundSprite.setTexture(m_backgroundTexture);
+    m_backgroundSprite.setScale({
+    static_cast<float>(GameConstants::WINDOW_WIDTH) / m_backgroundSprite.getGlobalBounds().size.x,
+    static_cast<float>(GameConstants::WINDOW_HEIGHT) / m_backgroundSprite.getGlobalBounds().size.y});
     std::cout << "BattleStage initialized\n";
 }
 
 void BattleStage::update() {
     sf::RenderWindow& window = WindowManager::getWindow();
+    window.draw(m_backgroundSprite);
    
   m_menuButton.update();
   
