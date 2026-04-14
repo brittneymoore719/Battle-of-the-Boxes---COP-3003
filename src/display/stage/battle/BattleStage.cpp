@@ -26,7 +26,7 @@ BattleStage::BattleStage(std::unique_ptr<CombatSequence> sequence)
       m_playerDead{false},
       m_cardsPlayed{0},
       m_drawCounterText(WindowManager::getFont()),
-      m_wasMousePressed{false}
+      m_wasMousePressed{false},
       m_menuButton{"Menu", {700.f, 40.f}, {120.f, 50.f}},
       m_exitButton{"Exit", {700.f, 100.f}, {120.f, 50.f}},
       m_menuOpen{false}
@@ -90,7 +90,6 @@ if (m_menuOpen) {
     m_sequence->update();
 
     switch (m_sequence->getState()) {
-
         case PLAYER_LOST: {
 
             m_drawCounterText.setString("You lose!");
@@ -106,53 +105,40 @@ if (m_menuOpen) {
 
             return;
         }
-sf::Text playerNameText(WindowManager::getFont());
-playerNameText.setCharacterSize(18);
-playerNameText.setFillColor(sf::Color::White);
-playerNameText.setString(
-    m_player->getName() + " HP: " +
-    std::to_string(static_cast<int>(m_player->getHealthPool().getCurrentHealth()))
-);
-playerNameText.setPosition({
-    m_player->getSprite().getPosition().x - 45.f,
-    m_player->getSprite().getPosition().y - 95.f
-});
-window.draw(playerNameText);
-
-for (const auto& enemy : m_enemies) {
-    sf::Text enemyNameText(WindowManager::getFont());
-    enemyNameText.setCharacterSize(18);
-    enemyNameText.setFillColor(sf::Color::White);
-    enemyNameText.setString(
-        enemy->getName() + " HP: " +
-        std::to_string(static_cast<int>(enemy->getHealthPool().getCurrentHealth()))
-    );
-    enemyNameText.setPosition({
-        enemy->getSprite().getPosition().x - 45.f,
-        enemy->getSprite().getPosition().y - 95.f
-    });
-    window.draw(enemyNameText);
-}
-
-
-
-    if (m_allEnemiesDead)
-    {
-    m_drawCounterText.setString("You win!");
-    window.draw(m_drawCounterText);
-    return;
-    }
-    else if (m_playerDead)
-    {
-    m_drawCounterText.setString("You lose!");
-    window.draw(m_drawCounterText);
-    return;
-    }
 
         default: break;
-
-
     }
+
+
+
+    sf::Text playerNameText(WindowManager::getFont());
+    playerNameText.setCharacterSize(18);
+    playerNameText.setFillColor(sf::Color::White);
+    playerNameText.setString(
+        m_sequence->getPlayer()->getName() + " HP: " +
+        std::to_string(static_cast<int>(m_sequence->getPlayer()->getHealthPool().getCurrentHealth()))
+    );
+    playerNameText.setPosition({
+        m_sequence->getPlayer()->getSprite().getPosition().x - 45.f,
+        m_sequence->getPlayer()->getSprite().getPosition().y - 95.f
+    });
+    window.draw(playerNameText);
+
+    for (const auto& enemy : m_sequence->getEnemies()) {
+        sf::Text enemyNameText(WindowManager::getFont());
+        enemyNameText.setCharacterSize(18);
+        enemyNameText.setFillColor(sf::Color::White);
+        enemyNameText.setString(
+            enemy->getName() + " HP: " +
+            std::to_string(static_cast<int>(enemy->getHealthPool().getCurrentHealth()))
+        );
+        enemyNameText.setPosition({
+            enemy->getSprite().getPosition().x - 45.f,
+            enemy->getSprite().getPosition().y - 95.f
+        });
+        window.draw(enemyNameText);
+    }
+
 
     for (const auto& enemy : m_sequence->getEnemies()) {
         if (!enemy->getHealthPool().isDead()) enemy->draw();
@@ -210,8 +196,8 @@ statsText.setCharacterSize(18);
 statsText.setFillColor(sf::Color::White);
 statsText.setPosition({10.f, 40.f});
 statsText.setString(
-    "Stats\nHP: " + std::to_string(static_cast<int>(m_player->getHealthPool().getCurrentHealth())) +
-    "\nBlock: " + std::to_string(static_cast<int>(m_player->getHealthPool().getBlock()))
+    "Stats\nHP: " + std::to_string(static_cast<int>(m_sequence->getPlayer()->getHealthPool().getCurrentHealth())) +
+    "\nBlock: " + std::to_string(static_cast<int>(m_sequence->getPlayer()->getHealthPool().getBlock()))
 );
 window.draw(statsText);
 

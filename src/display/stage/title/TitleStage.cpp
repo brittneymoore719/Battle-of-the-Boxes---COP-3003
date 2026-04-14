@@ -12,7 +12,6 @@
 
 #include "game/combat/CombatSequence.h"
 
-TitleStage::TitleStage() : Stage(), startButton{"Start Game", {GameConstants::WINDOW_WIDTH / 2.f, GameConstants::WINDOW_HEIGHT / 4.f * 3.f}, {GameConstants::WINDOW_WIDTH / 2.f,GameConstants::WINDOW_HEIGHT / 4.f}} {
 TitleStage::TitleStage()
     : Stage(),
       startButton{"Start Game",
@@ -36,7 +35,6 @@ void TitleStage::update() {
         enemies.push_back(std::make_unique<Zombie>(1));
         auto player = std::make_unique<PlayerCharacter>();
 
-        StageController::changeStage(new BattleStage(std::move(enemies), std::move(player)));
         auto sequence = std::make_unique<CombatSequence>(std::move(enemies), std::move(player));
 
         StageController::changeStage(new BattleStage(std::move(sequence)));
