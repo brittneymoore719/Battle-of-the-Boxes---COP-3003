@@ -27,7 +27,7 @@ void setCWD(char* exePath) {
 
 int main(int argc, char* argv[]) {
     setCWD(argv[0]);
-
+    WindowManager::createWindow();
     sf::RenderWindow& window = WindowManager::getWindow();
     StageController::changeStage(new TitleStage());
 	while ( window.isOpen() )

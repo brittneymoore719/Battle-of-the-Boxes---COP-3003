@@ -6,6 +6,7 @@
 
 class WindowManager {
 public:
+    static void createWindow();
     static sf::RenderWindow& getWindow();
     static void handleEvents();
     static sf::Vector2f getMousePos();

@@ -11,9 +11,9 @@ class PlayerCharacter;
 class Game{
 public:
 
-    static Game& getInstance() {
-        return instance;
-    }
+    //static Game& getInstance() {
+    //    return instance;
+    //}
 
     void start();
 
