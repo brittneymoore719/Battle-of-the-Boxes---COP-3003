@@ -19,10 +19,6 @@ file(GLOB_RECURSE
     ${CMAKE_SOURCE_DIR}/src/*.cpp
 )
 
-file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/src/sprites"
-     DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/bin")
-
-
 add_executable(Battle-of-the-Boxes ${SOURCE_FILES}
 )
 configure_file(
@@ -30,6 +26,23 @@ configure_file(
     "${CMAKE_CURRENT_BINARY_DIR}/bin/arial.ttf"
     COPYONLY
 )
+
+file(GLOB_RECURSE
+    SPRITE_FILES
+    CONFIGURE_DEPENDS
+    ${CMAKE_SOURCE_DIR}/src/sprites/*
+)
+
+
+add_custom_command(
+  TARGET Battle-of-the-Boxes
+  POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E copy_directory
+    ${CMAKE_SOURCE_DIR}/src/sprites
+    ${CMAKE_CURRENT_BINARY_DIR}/bin/sprites
+  DEPENDS ${SPRITE_FILES}
+)
+
 
 target_include_directories(Battle-of-the-Boxes PRIVATE ${CMAKE_SOURCE_DIR}/src/)
 target_compile_features(Battle-of-the-Boxes PRIVATE cxx_std_20)
