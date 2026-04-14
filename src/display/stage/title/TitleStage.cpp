@@ -13,11 +13,11 @@
 TitleStage::TitleStage()
     : Stage(),
       startButton{"Start Game",
-                  {GameConstants::WINDOW_WIDTH / 2.f, GameConstants::WINDOW_HEIGHT / 4.f * 3.f},
-                  {GameConstants::WINDOW_WIDTH / 2.f, GameConstants::WINDOW_HEIGHT / 4.f}},
+                  {GameConstants::WINDOW_WIDTH / 2.f, GameConstants::WINDOW_HEIGHT / 2.f},
+                  {300.f, 80.f}},
       exitButton{"Exit",
-                 {GameConstants::WINDOW_WIDTH / 2.f, GameConstants::WINDOW_HEIGHT / 4.f * 3.f + 80.f},
-                 {GameConstants::WINDOW_WIDTH / 2.f, GameConstants::WINDOW_HEIGHT / 4.f}}
+                 {GameConstants::WINDOW_WIDTH / 2.f, GameConstants::WINDOW_HEIGHT / 2.f + 120.f},
+                 {300.f, 80.f}}
 {
     std::cout << "TitleStage initialized\n";
 }
