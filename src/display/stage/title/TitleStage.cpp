@@ -35,7 +35,7 @@ void TitleStage::update() {
         StageController::changeStage(new BattleStage(std::move(enemies), std::move(player)));
     }
 
-    if (exitButton.hasBeenClicked()) {
+   else if (exitButton.hasBeenClicked()) {
         WindowManager::getWindow().close();
     }
 }
