@@ -6,6 +6,7 @@
 #include <memory>
 #include <vector>
 #include "stats/HealthPool.h"
+#include <string>
 
 
 class Character {
