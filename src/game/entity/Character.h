@@ -16,7 +16,8 @@ class Character {
     sf::Texture& getTexture();
     sf::Sprite& getSprite();
     HealthPool& getHealthPool();
-
+    std::string getName() const;
+    void setName(const std::string& name);
 
     void draw();
 
@@ -24,6 +25,7 @@ private:
     HealthPool m_healthPool;
     sf::Texture m_texture;
     sf::Sprite m_sprite;
+    std::string m_name;
 
 };
 
