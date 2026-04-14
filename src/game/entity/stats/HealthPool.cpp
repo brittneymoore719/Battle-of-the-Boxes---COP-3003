@@ -67,9 +67,18 @@ void HealthPool::resetBlock() {
     m_block = 0;
 }
 
+
 bool HealthPool::isDead() {
     if (m_current_health < 0) {
         m_current_health = 0;
     };
     return m_current_health == 0;
+}
+
+double HealthPool::getCurrentHealth() const {
+    return m_current_health;
+}
+
+double HealthPool::getBlock() const {
+    return m_block;
 }
