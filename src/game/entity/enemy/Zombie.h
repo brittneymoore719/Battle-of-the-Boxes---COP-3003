@@ -5,7 +5,7 @@
 class Zombie : public Enemy {
     public:
         Zombie(int position);
-        virtual void attack(Character& target) override;
+        void attack(Character& target) override;
     private:
 };
 

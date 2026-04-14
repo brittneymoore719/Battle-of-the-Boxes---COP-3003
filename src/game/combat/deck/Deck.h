@@ -7,7 +7,9 @@
 #include "Card.h"
 
 class Deck {
+
 public:
+
     explicit Deck(std::vector<std::shared_ptr<Card>>& cards);
     void activateCards(int numCards);
     void deactivateCard(std::shared_ptr<Card> card);

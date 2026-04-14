@@ -4,10 +4,15 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/System/Vector2.hpp>
 #include "WindowManager.h"
+#include "game/combat/deck/DeckManager.h"
 #include "stats/HealthPool.h"
 
 //basic constructor for the Box, this is subject to change
-Character::Character(const std::filesystem::path texturePath, int max_hp) : m_texture(sf::Texture(texturePath)), m_healthPool(max_hp),  m_sprite(m_texture) {
+Character::Character(const std::filesystem::path texturePath, int max_hp) :
+m_texture(sf::Texture(texturePath)),
+m_healthPool(max_hp),
+m_sprite(m_texture),
+m_deck(DeckManager::createDeck()){
     m_sprite.setOrigin(m_sprite.getGlobalBounds().size.componentWiseDiv({2, 2}));
 }
 
@@ -21,6 +26,10 @@ sf::Sprite& Character::getSprite() {
 
 HealthPool& Character::getHealthPool() {
     return m_healthPool;
+}
+
+Deck &Character::getDeck() {
+    return m_deck;
 }
 
 

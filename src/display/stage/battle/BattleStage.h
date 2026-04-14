@@ -8,27 +8,27 @@
 #include <vector>
 #include <memory>
 #include <SFML/Graphics/Text.hpp>
-#include "deck/Deck.h"
 #include "display/stage/Stage.h"
 #include "../../../game/entity/player/PlayerCharacter.h"
+#include "game/combat/CombatSequence.h"
+#include "game/combat/deck/Deck.h"
 #include "game/entity/enemy/Enemy.h"
 
 
 class BattleStage : public Stage {
 public:
-    BattleStage(std::vector<std::unique_ptr<Enemy>> enemies,
-                std::unique_ptr<PlayerCharacter> player);
+    BattleStage(std::unique_ptr<CombatSequence> sequence);
 
     virtual ~BattleStage() = default;
 
     bool isCharacterHovered();
 
-    virtual void update() override;
+    void update() override;
 
 private:
-    std::unique_ptr<PlayerCharacter> m_player;
-    std::vector<std::unique_ptr<Enemy>> m_enemies;
-    Deck m_deck;
+
+    std::unique_ptr<CombatSequence> m_sequence;
+
     int m_selectedCard;
 
     Enemy* m_hoveredEnemy;

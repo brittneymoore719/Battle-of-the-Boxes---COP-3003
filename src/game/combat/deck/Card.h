@@ -3,7 +3,9 @@
 
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <string>
-#include "game/entity/Character.h"
+
+class Character;
+
 class Card {
     public:
     Card(std::string name, std::string description);

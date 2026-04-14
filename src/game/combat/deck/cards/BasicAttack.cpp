@@ -2,6 +2,8 @@
 #include <iostream>
 #include <string>
 
+#include "game/entity/Character.h"
+
 BasicAttack::BasicAttack(): Card("Basic Attack", "do 5 damage") {
 
 }

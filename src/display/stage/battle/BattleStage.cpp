@@ -4,34 +4,31 @@
 
 #include "BattleStage.h"
 #include "WindowManager.h"
-#include "deck/DeckManager.h"
 #include "display/stage/Stage.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Mouse.hpp>
-#include <cstdio>
 #include <format>
 #include <iostream>
 #include <memory>
 #include <vector>
+
+#include "game/combat/deck/DeckManager.h"
 #include "game/entity/enemy/Enemy.h"
 #include "game/entity/player/PlayerCharacter.h"
 
 
-BattleStage::BattleStage(std::vector<std::unique_ptr<Enemy>> enemies,
-                         std::unique_ptr<PlayerCharacter> player)
-    : m_enemies(std::move(enemies)),
-      m_player(std::move(player)),
-      m_deck{DeckManager::createDeck()},
+BattleStage::BattleStage(std::unique_ptr<CombatSequence> sequence)
+    : Stage(),
+      m_sequence{std::move(sequence)},
       m_selectedCard{-1},
       m_hoveredEnemy{nullptr},
       m_allEnemiesDead{false},
       m_playerDead{false},
       m_cardsPlayed{0},
-      m_wasMousePressed{false},
       m_drawCounterText(WindowManager::getFont()),
-      Stage()
+      m_wasMousePressed{false}
 {
-    m_deck.activateCards(8);
+    m_sequence->getPlayer()->getDeck().activateCards(8);
     m_drawCounterText.setFont(WindowManager::getFont());
     m_drawCounterText.setCharacterSize(20);
     m_drawCounterText.setFillColor(sf::Color::White);
@@ -44,33 +41,48 @@ BattleStage::BattleStage(std::vector<std::unique_ptr<Enemy>> enemies,
 void BattleStage::update() {
     sf::RenderWindow& window = WindowManager::getWindow();
 
+
+    // click logic
     bool mouseCurrentlyPressed = sf::Mouse::isButtonPressed(sf::Mouse::Button::Left);
     bool mouseJustPressed = mouseCurrentlyPressed && !m_wasMousePressed;
     m_wasMousePressed = mouseCurrentlyPressed;
+    
+    m_sequence->getPlayer()->draw();
 
-    m_player->draw();
+    // basically should combat continue
 
-    m_playerDead = m_player->getHealthPool().isDead();
-    m_allEnemiesDead = true;
-    for (const auto& enemy : m_enemies) {
-        if (!enemy->getHealthPool().isDead()) m_allEnemiesDead = false;
-        enemy->draw();
+    m_sequence->update();
+
+    switch (m_sequence->getState()) {
+
+        case PLAYER_LOST: {
+
+            m_drawCounterText.setString("You lose!");
+            window.draw(m_drawCounterText);
+
+            return;
+        }
+
+        case PLAYER_WON: {
+
+            m_drawCounterText.setString("You win!");
+            window.draw(m_drawCounterText);
+
+            return;
+        }
+
+        default: break;
+
+
     }
 
-    if (m_allEnemiesDead)
-    {
-    m_drawCounterText.setString("You win!");
-    window.draw(m_drawCounterText);
-    return;
-    }
-    else if (m_playerDead)
-    {
-    m_drawCounterText.setString("You lose!");
-    window.draw(m_drawCounterText);
-    return;
+    for (const auto& enemy : m_sequence->getEnemies()) {
+        if (!enemy->getHealthPool().isDead()) enemy->draw();
     }
 
-    std::vector<std::shared_ptr<Card>>& cards = m_deck.getCards();
+    // there is probably some way to move some of the card logic out of here but i'm not sure how rn
+
+    std::vector<std::shared_ptr<Card>>& cards = m_sequence->getPlayer()->getDeck().getCards();
 
     for (int i = 0; i < static_cast<int>(cards.size()); ++i) {
         std::shared_ptr<Card> card = cards.at(i);
@@ -82,24 +94,29 @@ void BattleStage::update() {
         }
 
         if (m_selectedCard == i) {
+            
             sf::Vector2f mousePos = WindowManager::getMousePos();
+            
             card->drawFloating(mousePos);
 
             if (isCharacterHovered() && mouseJustPressed) {
+
                 if (m_playerHovered)
-                    card->use(*m_player, *m_player);
-                else if (m_hoveredEnemy != nullptr) card->use(*m_player, *m_hoveredEnemy);
+                    card->use(*m_sequence->getPlayer(), *m_sequence->getPlayer());
+                else if (m_hoveredEnemy != nullptr) card->use(*m_sequence->getPlayer(), *m_hoveredEnemy);
 
                 m_selectedCard = -1;
-                m_deck.deactivateCard(card);
+                
+                m_sequence->getPlayer()->getDeck().deactivateCard(card);
+                
                 m_cardsPlayed += 1;
 
 
                 if (m_cardsPlayed % 3 == 0) {
                     refreshHand();
                     m_selectedCard = -1;
-                    for (auto& enemy : m_enemies) {
-                        enemy->attack(*m_player);
+                    for (auto& enemy : m_sequence->getEnemies()) {
+                        enemy->attack(*m_sequence->getPlayer());
                     }
                 }
                 updateDrawCounterDisplay();
@@ -119,7 +136,7 @@ bool BattleStage::isCharacterHovered() {
   m_hoveredEnemy = nullptr;
   m_playerHovered = false;
 
-    for (std::unique_ptr<Enemy>& enemy : m_enemies) {
+    for (std::unique_ptr<Enemy>& enemy : m_sequence->getEnemies()) {
         if (enemy->getSprite().getGlobalBounds().contains(mousePos)) {
             m_hoveredEnemy = enemy.get();
             m_playerHovered = false;;
@@ -127,7 +144,7 @@ bool BattleStage::isCharacterHovered() {
         }
     }
 
-    if (m_player->getSprite().getGlobalBounds().contains(mousePos)) {
+    if (m_sequence->getPlayer()->getSprite().getGlobalBounds().contains(mousePos)) {
         m_playerHovered = true;
         return true;
     } else {
@@ -142,14 +159,14 @@ void BattleStage::updateDrawCounterDisplay() {
 }
 
 void BattleStage::refreshHand() {
-    std::vector<std::shared_ptr<Card>> active = m_deck.getCards();
+    std::vector<std::shared_ptr<Card>> active = m_sequence->getPlayer()->getDeck().getCards();
     for (auto& card : active) {
-        m_deck.deactivateCard(card);
+        m_sequence->getPlayer()->getDeck().deactivateCard(card);
     }
 
-    if (m_deck.getInactiveCount() < 8) {
-        m_deck.reshuffleDiscard();
+    if (m_sequence->getPlayer()->getDeck().getInactiveCount() < 8) {
+        m_sequence->getPlayer()->getDeck().reshuffleDiscard();
     }
 
-    m_deck.activateCards(8);
+    m_sequence->getPlayer()->getDeck().activateCards(8);
 }

@@ -24,6 +24,8 @@ file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/src/sprites"
 
 
 add_executable(Battle-of-the-Boxes ${SOURCE_FILES}
+        src/game/combat/CombatSequence.cpp
+        src/game/combat/CombatSequence.h
 )
 configure_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/arial.ttf"
