@@ -12,6 +12,7 @@
 #include "display/stage/Stage.h"
 #include "../../../game/entity/player/PlayerCharacter.h"
 #include "game/entity/enemy/Enemy.h"
+#include "display/displayable/ui/button/UiButton.h"
 
 
 class BattleStage : public Stage {
@@ -37,6 +38,7 @@ private:
     bool m_playerDead;
     int m_cardsPlayed;
     sf::Text m_drawCounterText;
+    UiButton m_menuButton;
     void updateDrawCounterDisplay();
     void refreshHand();
 
