@@ -44,7 +44,14 @@ BattleStage::BattleStage(std::vector<std::unique_ptr<Enemy>> enemies,
 
 void BattleStage::update() {
     sf::RenderWindow& window = WindowManager::getWindow();
-
+   
+  m_menuButton.update();
+  
+if (m_menuButton.hasBeenClicked()) 
+{
+    window.close();
+    return;
+}
     bool mouseCurrentlyPressed = sf::Mouse::isButtonPressed(sf::Mouse::Button::Left);
     bool mouseJustPressed = mouseCurrentlyPressed && !m_wasMousePressed;
     m_wasMousePressed = mouseCurrentlyPressed;
