@@ -41,7 +41,7 @@ BattleStage::BattleStage(std::vector<std::unique_ptr<Enemy>> enemies,
     m_drawCounterText.setPosition({10.f, 10.f});
     updateDrawCounterDisplay();
     m_backgroundTexture.emplace();
-if (!m_backgroundTexture->loadFromFile("src/sprites/battle_background.jpg"))
+if (!m_backgroundTexture->loadFromFile("../../../../src/sprites/battle_background.jpg"))
 {
     std::cerr << "Failed to load battle_background.jpg\n";
 }
