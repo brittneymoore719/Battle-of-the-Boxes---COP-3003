@@ -13,7 +13,7 @@
 #include "../../../game/entity/player/PlayerCharacter.h"
 #include "game/entity/enemy/Enemy.h"
 #include "display/displayable/ui/button/UiButton.h"
-
+#include<optional>
 
 class BattleStage : public Stage {
 public:
@@ -38,8 +38,8 @@ private:
     bool m_playerDead;
     int m_cardsPlayed;
     sf::Text m_drawCounterText;
-    sf::Texture m_backgroundTexture;
-    sf::Sprite m_backgroundSprite;
+    std::optional<sf::Texture> m_backgroundTexture;
+    std::optional<sf::Sprite> m_backgroundSprite;
     UiButton m_menuButton;
     UiButton m_exitButton;
     bool m_menuOpen;
