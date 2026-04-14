@@ -122,7 +122,7 @@ bool BattleStage::isCharacterHovered() {
     for (std::unique_ptr<Enemy>& enemy : m_enemies) {
         if (enemy->getSprite().getGlobalBounds().contains(mousePos)) {
             m_hoveredEnemy = enemy.get();
-            m_playerHovered = false;;
+            m_playerHovered = false;
             return true;
         }
     }
@@ -146,7 +146,10 @@ void BattleStage::refreshHand() {
     for (auto& card : active) {
         m_deck.deactivateCard(card);
     }
-
+  
+    if (m_deck.getInactiveCount() == 0) {
+        return;
+    }
     if (m_deck.getInactiveCount() < 8) {
         m_deck.reshuffleDiscard();
     }
