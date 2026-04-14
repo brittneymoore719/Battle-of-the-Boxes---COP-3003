@@ -23,7 +23,7 @@ private:
 
     Game();
 
-    static Game instance;
+    //static Game instance;
 
     PlayerCharacter m_player;
 
