@@ -51,8 +51,15 @@ void BattleStage::update() {
   
 if (m_menuButton.hasBeenClicked()) 
 {
-    window.close();
-    return;
+    m_menuOpen = !m_menuOpen;
+}
+if (m_menuOpen) {
+    m_exitButton.update();
+
+    if (m_exitButton.hasBeenClicked()) {
+        window.close();
+        return;
+    }
 }
     bool mouseCurrentlyPressed = sf::Mouse::isButtonPressed(sf::Mouse::Button::Left);
     bool mouseJustPressed = mouseCurrentlyPressed && !m_wasMousePressed;
