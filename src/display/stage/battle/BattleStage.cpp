@@ -40,17 +40,29 @@ BattleStage::BattleStage(std::vector<std::unique_ptr<Enemy>> enemies,
     m_drawCounterText.setFillColor(sf::Color::White);
     m_drawCounterText.setPosition({10.f, 10.f});
     updateDrawCounterDisplay();
-    m_backgroundTexture.loadFromFile("sprites/battle_background.jpg");    m_backgroundSprite.setTexture(m_backgroundTexture);
-    m_backgroundSprite.setScale({
-    static_cast<float>(Constants::WINDOW_WIDTH) / m_backgroundSprite.getGlobalBounds().size.x,
-    static_cast<float>(Constants::WINDOW_HEIGHT) / m_backgroundSprite.getGlobalBounds().size.y});
+    if (!m_backgroundTexture.loadFromFile("sprites/battle_background.jpg"))
+{
+    std::cerr << "Failed to load battle_background.jpg\n";
+}
+
+m_backgroundSprite.setTexture(m_backgroundTexture);
+
+sf::RenderWindow& window = WindowManager::getWindow();
+const auto bgSize = m_backgroundSprite.getGlobalBounds().size;
+
+m_backgroundSprite.setScale({
+    static_cast<float>(window.getSize().x) / bgSize.x,
+    static_cast<float>(window.getSize().y) / bgSize.y
+});
     std::cout << "BattleStage initialized\n";
 }
 
 void BattleStage::update() {
     sf::RenderWindow& window = WindowManager::getWindow();
-    window.draw(m_backgroundSprite);
-   
+if (m_backgroundSprite.has_value())
+{
+    window.draw(*m_backgroundSprite);
+}   
   m_menuButton.update();
   
 if (m_menuButton.hasBeenClicked()) 
