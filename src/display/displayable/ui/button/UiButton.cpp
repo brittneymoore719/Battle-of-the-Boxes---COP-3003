@@ -11,7 +11,8 @@
 #include <iostream>
 #include "WindowManager.h"
 
-UiButton::UiButton(std::string label, sf::Vector2f position, sf::Vector2f size) : m_clicked{false}, m_rect{size} {
+UiButton::UiButton(std::string label, sf::Vector2f position, sf::Vector2f size) : m_clicked{false}, m_wasMousePressed{false}, m_rect{size} 
+{
     m_label = label;
     m_rect.setOrigin(size.componentWiseDiv({2.0f, 2.0f}));
     m_rect.setPosition(position);
@@ -19,12 +20,11 @@ UiButton::UiButton(std::string label, sf::Vector2f position, sf::Vector2f size) 
 
 void UiButton::update() {
     sf::RenderWindow& window = WindowManager::getWindow();
-    static bool wasMousePressed = false;
     bool isMousePressed = sf::Mouse::isButtonPressed(sf::Mouse::Button::Left);
 
     if (isHovered()) {
         m_rect.setFillColor(sf::Color::Green);
-        m_clicked = isMousePressed && !wasMousePressed;
+        m_clicked = isMousePressed && !m_wasMousePressed;
     }
     else
     {
@@ -44,7 +44,7 @@ void UiButton::update() {
 
     window.draw(m_rect);
     window.draw(label_text);
-    wasMousePressed = isMousePressed;
+    m_wasMousePressed = isMousePressed;
 }
 
 bool UiButton::hasBeenClicked() {
