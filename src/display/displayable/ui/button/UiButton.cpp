@@ -19,14 +19,19 @@ UiButton::UiButton(std::string label, sf::Vector2f position, sf::Vector2f size) 
 
 void UiButton::update() {
     sf::RenderWindow& window = WindowManager::getWindow();
+    static bool wasMousePressed = false;
+    bool isMousePressed = sf::Mouse::isButtonPressed(sf::Mouse::Button::Left);
 
     if (isHovered()) {
         m_rect.setFillColor(sf::Color::Green);
-        m_clicked = sf::Mouse::isButtonPressed(sf::Mouse::Button::Left);
+        m_clicked = isMousePressed && !wasMousePressed;
     }
     else
+    {
         m_rect.setFillColor(sf::Color::Blue);
-
+         m_clicked = false;
+    }
+    
     sf::Text label_text(WindowManager::getFont());
     label_text.setFillColor(sf::Color::Red);
     label_text.setString(m_label);
@@ -39,6 +44,7 @@ void UiButton::update() {
 
     window.draw(m_rect);
     window.draw(label_text);
+    wasMousePressed = isMousePressed;
 }
 
 bool UiButton::hasBeenClicked() {
