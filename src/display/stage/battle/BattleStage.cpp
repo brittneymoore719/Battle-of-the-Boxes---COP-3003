@@ -29,6 +29,7 @@ BattleStage::BattleStage(std::vector<std::unique_ptr<Enemy>> enemies,
       m_cardsPlayed{0},
       m_wasMousePressed{false},
       m_drawCounterText(WindowManager::getFont()),
+      m_menuButton{"Menu", {700.f, 40.f}, {120.f, 50.f}},
       Stage()
 {
     m_deck.activateCards(8);
