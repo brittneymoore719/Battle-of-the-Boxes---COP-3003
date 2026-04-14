@@ -40,20 +40,23 @@ BattleStage::BattleStage(std::vector<std::unique_ptr<Enemy>> enemies,
     m_drawCounterText.setFillColor(sf::Color::White);
     m_drawCounterText.setPosition({10.f, 10.f});
     updateDrawCounterDisplay();
-    if (!m_backgroundTexture.loadFromFile("sprites/battle_background.jpg"))
+    m_backgroundTexture.emplace();
+if (!m_backgroundTexture->loadFromFile("sprites/battle_background.jpg"))
 {
     std::cerr << "Failed to load battle_background.jpg\n";
 }
+else
+{
+    m_backgroundSprite.emplace(*m_backgroundTexture);
 
-m_backgroundSprite.setTexture(m_backgroundTexture);
+    sf::RenderWindow& window = WindowManager::getWindow();
+    const auto bgSize = m_backgroundSprite->getGlobalBounds().size;
 
-sf::RenderWindow& window = WindowManager::getWindow();
-const auto bgSize = m_backgroundSprite.getGlobalBounds().size;
-
-m_backgroundSprite.setScale({
-    static_cast<float>(window.getSize().x) / bgSize.x,
-    static_cast<float>(window.getSize().y) / bgSize.y
-});
+    m_backgroundSprite->setScale({
+        static_cast<float>(window.getSize().x) / bgSize.x,
+        static_cast<float>(window.getSize().y) / bgSize.y
+    });
+}
     std::cout << "BattleStage initialized\n";
 }
 
