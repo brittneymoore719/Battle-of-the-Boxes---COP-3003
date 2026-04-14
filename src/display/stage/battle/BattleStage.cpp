@@ -4,7 +4,7 @@
 
 #include "BattleStage.h"
 #include "WindowManager.h"
-#include "deck/DeckFManager.h"
+#include "deck/DeckManager.h"
 #include "display/stage/Stage.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Mouse.hpp>
