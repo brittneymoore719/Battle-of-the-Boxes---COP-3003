@@ -14,7 +14,7 @@ class Card {
     void drawFloating(sf::Vector2f newPos);
     void drawInternals();
 
-    virtual void use(Character& user, Character& target) = 0;
+    virtual bool use(Character& user, Character& target) = 0;
 
     private:
     sf::RectangleShape m_rect;

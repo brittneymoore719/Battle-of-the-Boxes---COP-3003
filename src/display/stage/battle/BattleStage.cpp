@@ -21,6 +21,7 @@ BattleStage::BattleStage(std::unique_ptr<CombatSequence> sequence)
     : Stage(),
       m_sequence{std::move(sequence)},
       m_selectedCard{-1},
+        m_playerHovered(false),
       m_hoveredEnemy{nullptr},
       m_allEnemiesDead{false},
       m_playerDead{false},
@@ -38,7 +39,7 @@ BattleStage::BattleStage(std::unique_ptr<CombatSequence> sequence)
     m_drawCounterText.setPosition({10.f, 10.f});
     updateDrawCounterDisplay();
     m_backgroundTexture.emplace();
-if (!m_backgroundTexture->loadFromFile("../../../../src/sprites/battle_background.jpg"))
+if (!m_backgroundTexture->loadFromFile("../../assets/sprites/battle_background.jpg"))
 {
     std::cerr << "Failed to load battle_background.jpg\n";
 }
@@ -165,25 +166,34 @@ if (m_menuOpen) {
 
             if (isCharacterHovered() && mouseJustPressed) {
 
-                if (m_playerHovered)
-                    card->use(*m_sequence->getPlayer(), *m_sequence->getPlayer());
-                else if (m_hoveredEnemy != nullptr) card->use(*m_sequence->getPlayer(), *m_hoveredEnemy);
+                bool cardUsed = false;
 
-                m_selectedCard = -1;
-
-                m_sequence->getPlayer()->getDeck().deactivateCard(card);
-
-                m_cardsPlayed += 1;
-
-
-                if (m_cardsPlayed % 3 == 0) {
-                    refreshHand();
-                    m_selectedCard = -1;
-                    for (auto& enemy : m_sequence->getEnemies()) {
-                        enemy->attack(*m_sequence->getPlayer());
-                    }
+                if (m_playerHovered) {
+                    cardUsed = card->use(*m_sequence->getPlayer(), *m_sequence->getPlayer());
                 }
-                updateDrawCounterDisplay();
+
+                else if (m_hoveredEnemy != nullptr) {
+                    cardUsed = card->use(*m_sequence->getPlayer(), *m_hoveredEnemy);
+                }
+
+                if (cardUsed) {
+
+                    m_selectedCard = -1;
+
+                    m_sequence->getPlayer()->getDeck().deactivateCard(card);
+
+                    m_cardsPlayed += 1;
+
+                    if (m_cardsPlayed % 3 == 0) {
+                        refreshHand();
+                        m_selectedCard = -1;
+                        for (auto& enemy : m_sequence->getEnemies()) {
+                            enemy->attack(*m_sequence->getPlayer());
+                        }
+                    }
+                    updateDrawCounterDisplay();
+
+                }
 
                 break;
             }

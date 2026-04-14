@@ -6,7 +6,7 @@
 class BasicAttack : public Card {
     public:
     BasicAttack();
-    void use(Character& user, Character& target) override;
+    bool use(Character& user, Character& target) override;
 };
 
 #endif

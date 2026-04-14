@@ -10,7 +10,15 @@ Block::Block(): Card("Block", "block 5\ndamage") {
 
 }
 
-void Block::use(Character& user, Character& target) {
+bool Block::use(Character& user, Character& target) {
+
+    if (&user != &target) {
+        return false;
+    }
+
     HealthPool& targetHealthPool = target.getHealthPool();
     targetHealthPool.addBlock(5);
+
+    return true;
+
 }

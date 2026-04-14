@@ -60,6 +60,4 @@ void CombatSequence::update() {
         return;
     }
 
-    std::cout << "Combat should continue" << std::endl;
-
 }

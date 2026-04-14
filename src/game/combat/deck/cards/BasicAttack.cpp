@@ -8,6 +8,13 @@ BasicAttack::BasicAttack(): Card("Basic Attack", "do 5 damage") {
 
 }
 
-void BasicAttack::use(Character& user, Character& target) {
+bool BasicAttack::use(Character& user, Character& target) {
+
+    if (&user == &target) {
+        return false;
+    }
+
     target.getHealthPool().takeDamage(5);
+    return true;
+
 }
