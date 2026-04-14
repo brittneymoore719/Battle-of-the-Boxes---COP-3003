@@ -38,6 +38,8 @@ private:
     bool m_playerDead;
     int m_cardsPlayed;
     sf::Text m_drawCounterText;
+    sf::Texture m_backgroundTexture;
+    sf::Sprite m_backgroundSprite;
     UiButton m_menuButton;
     UiButton m_exitButton;
     bool m_menuOpen;
