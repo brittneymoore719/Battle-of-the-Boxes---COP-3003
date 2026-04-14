@@ -8,6 +8,7 @@
 
 #include "game/combat/deck/Deck.h"
 #include "stats/HealthPool.h"
+#include <string>
 
 
 class Character {
@@ -21,6 +22,8 @@ class Character {
     HealthPool& getHealthPool();
     Deck& getDeck();
 
+    std::string getName() const;
+    void setName(const std::string& name);
 
     void draw();
 
@@ -30,6 +33,7 @@ private:
     Deck m_deck;
     sf::Texture m_texture;
     sf::Sprite m_sprite;
+    std::string m_name;
 
 };
 

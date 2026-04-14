@@ -27,6 +27,9 @@ BattleStage::BattleStage(std::unique_ptr<CombatSequence> sequence)
       m_cardsPlayed{0},
       m_drawCounterText(WindowManager::getFont()),
       m_wasMousePressed{false}
+      m_menuButton{"Menu", {700.f, 40.f}, {120.f, 50.f}},
+      m_exitButton{"Exit", {700.f, 100.f}, {120.f, 50.f}},
+      m_menuOpen{false}
 {
     m_sequence->getPlayer()->getDeck().activateCards(8);
     m_drawCounterText.setFont(WindowManager::getFont());
@@ -34,19 +37,52 @@ BattleStage::BattleStage(std::unique_ptr<CombatSequence> sequence)
     m_drawCounterText.setFillColor(sf::Color::White);
     m_drawCounterText.setPosition({10.f, 10.f});
     updateDrawCounterDisplay();
+    m_backgroundTexture.emplace();
+if (!m_backgroundTexture->loadFromFile("../../../../src/sprites/battle_background.jpg"))
+{
+    std::cerr << "Failed to load battle_background.jpg\n";
+}
+else
+{
+    m_backgroundSprite.emplace(*m_backgroundTexture);
 
+    sf::RenderWindow& window = WindowManager::getWindow();
+    const auto bgSize = m_backgroundSprite->getGlobalBounds().size;
+
+    m_backgroundSprite->setScale({
+        static_cast<float>(window.getSize().x) / bgSize.x,
+        static_cast<float>(window.getSize().y) / bgSize.y
+    });
+}
     std::cout << "BattleStage initialized\n";
 }
 
 void BattleStage::update() {
     sf::RenderWindow& window = WindowManager::getWindow();
+if (m_backgroundSprite.has_value())
+{
+    window.draw(*m_backgroundSprite);
+}
+  m_menuButton.update();
+
+if (m_menuButton.hasBeenClicked())
+{
+    m_menuOpen = !m_menuOpen;
+}
+if (m_menuOpen) {
+    m_exitButton.update();
 
 
     // click logic
+    if (m_exitButton.hasBeenClicked()) {
+        window.close();
+        return;
+    }
+}
     bool mouseCurrentlyPressed = sf::Mouse::isButtonPressed(sf::Mouse::Button::Left);
     bool mouseJustPressed = mouseCurrentlyPressed && !m_wasMousePressed;
     m_wasMousePressed = mouseCurrentlyPressed;
-    
+
     m_sequence->getPlayer()->draw();
 
     // basically should combat continue
@@ -70,6 +106,48 @@ void BattleStage::update() {
 
             return;
         }
+sf::Text playerNameText(WindowManager::getFont());
+playerNameText.setCharacterSize(18);
+playerNameText.setFillColor(sf::Color::White);
+playerNameText.setString(
+    m_player->getName() + " HP: " +
+    std::to_string(static_cast<int>(m_player->getHealthPool().getCurrentHealth()))
+);
+playerNameText.setPosition({
+    m_player->getSprite().getPosition().x - 45.f,
+    m_player->getSprite().getPosition().y - 95.f
+});
+window.draw(playerNameText);
+
+for (const auto& enemy : m_enemies) {
+    sf::Text enemyNameText(WindowManager::getFont());
+    enemyNameText.setCharacterSize(18);
+    enemyNameText.setFillColor(sf::Color::White);
+    enemyNameText.setString(
+        enemy->getName() + " HP: " +
+        std::to_string(static_cast<int>(enemy->getHealthPool().getCurrentHealth()))
+    );
+    enemyNameText.setPosition({
+        enemy->getSprite().getPosition().x - 45.f,
+        enemy->getSprite().getPosition().y - 95.f
+    });
+    window.draw(enemyNameText);
+}
+
+
+
+    if (m_allEnemiesDead)
+    {
+    m_drawCounterText.setString("You win!");
+    window.draw(m_drawCounterText);
+    return;
+    }
+    else if (m_playerDead)
+    {
+    m_drawCounterText.setString("You lose!");
+    window.draw(m_drawCounterText);
+    return;
+    }
 
         default: break;
 
@@ -94,9 +172,9 @@ void BattleStage::update() {
         }
 
         if (m_selectedCard == i) {
-            
+
             sf::Vector2f mousePos = WindowManager::getMousePos();
-            
+
             card->drawFloating(mousePos);
 
             if (isCharacterHovered() && mouseJustPressed) {
@@ -106,9 +184,9 @@ void BattleStage::update() {
                 else if (m_hoveredEnemy != nullptr) card->use(*m_sequence->getPlayer(), *m_hoveredEnemy);
 
                 m_selectedCard = -1;
-                
+
                 m_sequence->getPlayer()->getDeck().deactivateCard(card);
-                
+
                 m_cardsPlayed += 1;
 
 
@@ -127,6 +205,15 @@ void BattleStage::update() {
             card->draw(i, cards.size());
         }
     }
+sf::Text statsText(WindowManager::getFont());
+statsText.setCharacterSize(18);
+statsText.setFillColor(sf::Color::White);
+statsText.setPosition({10.f, 40.f});
+statsText.setString(
+    "Stats\nHP: " + std::to_string(static_cast<int>(m_player->getHealthPool().getCurrentHealth())) +
+    "\nBlock: " + std::to_string(static_cast<int>(m_player->getHealthPool().getBlock()))
+);
+window.draw(statsText);
 
     window.draw(m_drawCounterText);
 }
@@ -139,7 +226,7 @@ bool BattleStage::isCharacterHovered() {
     for (std::unique_ptr<Enemy>& enemy : m_sequence->getEnemies()) {
         if (enemy->getSprite().getGlobalBounds().contains(mousePos)) {
             m_hoveredEnemy = enemy.get();
-            m_playerHovered = false;;
+            m_playerHovered = false;
             return true;
         }
     }

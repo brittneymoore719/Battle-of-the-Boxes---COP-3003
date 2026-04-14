@@ -6,8 +6,12 @@
 #include "game/Constants.h"
 
 
-sf::RenderWindow WindowManager::m_window = sf::RenderWindow(sf::VideoMode({GameConstants::WINDOW_WIDTH, GameConstants::WINDOW_HEIGHT}), "Battle Of The Boxes");
+sf::RenderWindow WindowManager::m_window;
 sf::Font WindowManager::m_font("arial.ttf");
+
+void WindowManager::createWindow() {
+    m_window = sf::RenderWindow(sf::VideoMode({GameConstants::WINDOW_WIDTH, GameConstants::WINDOW_HEIGHT}), "Battle Of The Boxes");
+}
 
 sf::RenderWindow& WindowManager::getWindow() {
     return m_window;

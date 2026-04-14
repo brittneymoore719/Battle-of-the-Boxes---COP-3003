@@ -14,6 +14,7 @@ class UiButton : Updatable {
         bool isHovered();
     private:
         bool m_clicked;
+        bool m_wasMousePressed;
         std::string m_label;
 
         sf::RectangleShape m_rect;

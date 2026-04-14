@@ -13,7 +13,8 @@
 #include "game/combat/CombatSequence.h"
 #include "game/combat/deck/Deck.h"
 #include "game/entity/enemy/Enemy.h"
-
+#include "display/displayable/ui/button/UiButton.h"
+#include<optional>
 
 class BattleStage : public Stage {
 public:
@@ -37,6 +38,11 @@ private:
     bool m_playerDead;
     int m_cardsPlayed;
     sf::Text m_drawCounterText;
+    std::optional<sf::Texture> m_backgroundTexture;
+    std::optional<sf::Sprite> m_backgroundSprite;
+    UiButton m_menuButton;
+    UiButton m_exitButton;
+    bool m_menuOpen;
     void updateDrawCounterDisplay();
     void refreshHand();
 

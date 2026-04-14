@@ -14,9 +14,6 @@ public:
     void setPosition(int position);
 
     virtual void attack(Character& target) = 0;
-
-    private:
-    std::string m_name;
 };
 
 #endif //BATTLE_OF_THE_BOXES___COP_3003_ENEMY_H

@@ -7,7 +7,7 @@
 
 // if we truly want a Game object it should be a singleton
 
-Game Game::instance{};
+//Game Game::instance{};
 
 Game::Game() : m_player(PlayerCharacter()) {
 }

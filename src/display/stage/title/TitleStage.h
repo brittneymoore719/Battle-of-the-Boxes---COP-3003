@@ -10,6 +10,7 @@ public:
     void update() override;
 private:
     UiButton startButton;
+    UiButton exitButton;
 };
 
 #endif

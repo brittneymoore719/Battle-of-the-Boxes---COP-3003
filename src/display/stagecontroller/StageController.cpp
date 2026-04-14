@@ -1,9 +1,7 @@
 #include "display/stagecontroller/StageController.h"
 #include "display/stage/Stage.h"
-#include "../stage/title/TitleStage.h"
 
-// defaults to the title stage
-Stage* StageController::m_currentStage = new TitleStage();
+Stage* StageController::m_currentStage = nullptr;
 
 void StageController::changeStage(Stage* newStage) {
     delete m_currentStage; // free previous stage from memory

@@ -12,6 +12,8 @@ class HealthPool {
     void addBlock(double blockAmount);
 
     void draw(sf::Vector2f display_position);
+    double getCurrentHealth() const;
+    double getBlock() const;
 
     private:
     sf::RectangleShape m_rect;

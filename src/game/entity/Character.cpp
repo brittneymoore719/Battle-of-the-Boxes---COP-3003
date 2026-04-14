@@ -12,7 +12,8 @@ Character::Character(const std::filesystem::path texturePath, int max_hp) :
 m_texture(sf::Texture(texturePath)),
 m_healthPool(max_hp),
 m_sprite(m_texture),
-m_deck(DeckManager::createDeck()){
+m_deck(DeckManager::createDeck()),
+m_name("Unknown"){
     m_sprite.setOrigin(m_sprite.getGlobalBounds().size.componentWiseDiv({2, 2}));
 }
 
@@ -30,6 +31,16 @@ HealthPool& Character::getHealthPool() {
 
 Deck &Character::getDeck() {
     return m_deck;
+}
+
+std::string Character::getName() const
+{
+    return m_name;
+}
+
+void Character::setName(const std::string& name)
+{
+    m_name = name;
 }
 
 
