@@ -39,6 +39,7 @@ private:
     int m_cardsPlayed;
     sf::Text m_drawCounterText;
     UiButton m_menuButton;
+    UiButton m_exitButton;
     bool m_menuOpen;
     void updateDrawCounterDisplay();
     void refreshHand();
