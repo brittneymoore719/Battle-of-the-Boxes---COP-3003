@@ -140,7 +140,16 @@ for (const auto& enemy : m_enemies) {
             card->draw(i, cards.size());
         }
     }
-
+sf::Text statsText(WindowManager::getFont());
+statsText.setCharacterSize(18);
+statsText.setFillColor(sf::Color::White);
+statsText.setPosition({10.f, 40.f});
+statsText.setString(
+    "Stats\nHP: " + std::to_string(static_cast<int>(m_player->getHealthPool().getCurrentHealth())) +
+    "\nBlock: " + std::to_string(static_cast<int>(m_player->getHealthPool().getBlock()))
+);
+window.draw(statsText);
+  
     window.draw(m_drawCounterText);
 }
 
