@@ -4,7 +4,7 @@
 
 #include "BattleStage.h"
 #include "WindowManager.h"
-#include "deck/DeckManager.h"
+#include "deck/DeckFManager.h"
 #include "display/stage/Stage.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Mouse.hpp>
@@ -56,6 +56,36 @@ void BattleStage::update() {
         if (!enemy->getHealthPool().isDead()) m_allEnemiesDead = false;
         enemy->draw();
     }
+
+sf::Text playerNameText(WindowManager::getFont());
+playerNameText.setCharacterSize(18);
+playerNameText.setFillColor(sf::Color::White);
+playerNameText.setString(
+    m_player->getName() + " HP: " +
+    std::to_string(static_cast<int>(m_player->getHealthPool().getCurrentHealth()))
+);
+playerNameText.setPosition({
+    m_player->getSprite().getPosition().x - 45.f,
+    m_player->getSprite().getPosition().y - 95.f
+});
+window.draw(playerNameText);
+
+for (const auto& enemy : m_enemies) {
+    sf::Text enemyNameText(WindowManager::getFont());
+    enemyNameText.setCharacterSize(18);
+    enemyNameText.setFillColor(sf::Color::White);
+    enemyNameText.setString(
+        enemy->getName() + " HP: " +
+        std::to_string(static_cast<int>(enemy->getHealthPool().getCurrentHealth()))
+    );
+    enemyNameText.setPosition({
+        enemy->getSprite().getPosition().x - 45.f,
+        enemy->getSprite().getPosition().y - 95.f
+    });
+    window.draw(enemyNameText);
+}
+  
+  
 
     if (m_allEnemiesDead)
     {
