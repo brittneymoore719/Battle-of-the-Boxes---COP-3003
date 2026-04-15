@@ -14,7 +14,8 @@
 #include "game/combat/deck/Deck.h"
 #include "game/entity/enemy/Enemy.h"
 #include "display/displayable/ui/button/UiButton.h"
-#include<optional>
+#include <optional>
+#include "game/combat/TurnManager.h"
 
 class BattleStage : public Stage {
 public:
@@ -29,22 +30,18 @@ public:
 private:
 
     std::unique_ptr<CombatSequence> m_sequence;
+    TurnManager m_turnManager;
 
-    int m_selectedCard;
 
     Enemy* m_hoveredEnemy;
     bool m_playerHovered;
     bool m_allEnemiesDead;
     bool m_playerDead;
-    int m_cardsPlayed;
-    sf::Text m_drawCounterText;
     std::optional<sf::Texture> m_backgroundTexture;
     std::optional<sf::Sprite> m_backgroundSprite;
     UiButton m_menuButton;
     UiButton m_exitButton;
     bool m_menuOpen;
-    void updateDrawCounterDisplay();
-    void refreshHand();
 
     bool m_wasMousePressed;   // added to prevent actions from repeating when the mouse is held down
     
@@ -54,7 +51,7 @@ private:
     //std::optional<sf::Sprite> m_trashSprite;
     UiButton m_discardButton;
 
-    //for pass button
+    //for pass 
     UiButton m_passButton;
 };
 
