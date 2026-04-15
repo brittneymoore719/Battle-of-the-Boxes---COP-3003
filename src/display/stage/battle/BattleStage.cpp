@@ -21,26 +21,17 @@
 BattleStage::BattleStage(std::unique_ptr<CombatSequence> sequence)
     : Stage(),
       m_sequence{std::move(sequence)},
-      m_selectedCard{-1},
         m_playerHovered(false),
       m_hoveredEnemy{nullptr},
       m_allEnemiesDead{false},
       m_playerDead{false},
-      m_cardsPlayed{0},
-      m_drawCounterText(WindowManager::getFont()),
       m_wasMousePressed{false},
       m_menuButton{"Menu", {600.f, 40.f}, {120.f, 50.f}},
       m_exitButton{"Exit", {600.f, 100.f}, {120.f, 50.f}},
       m_discardButton {"Discard", {600.f, 450.f}, {120.f, 50.f}},
       m_passButton {"Pass", {400.f, 520.f}, {120.f, 50.f}},
-      m_menuOpen{false}
-{
+      m_menuOpen{false} {
     m_sequence->getPlayer()->getDeck().activateCards(8);
-    m_drawCounterText.setFont(WindowManager::getFont());
-    m_drawCounterText.setCharacterSize(20);
-    m_drawCounterText.setFillColor(sf::Color::White);
-    m_drawCounterText.setPosition({10.f, 10.f});
-    updateDrawCounterDisplay();
     m_backgroundTexture.emplace();
 if (!m_backgroundTexture->loadFromFile("assets/sprites/battle_background.jpg"))
 {
@@ -139,18 +130,22 @@ m_sequence->getPlayer()->draw();
 
     switch (m_sequence->getState()) {
         case PLAYER_LOST: {
-
-            m_drawCounterText.setString("You lose!");
-            window.draw(m_drawCounterText);
-
+            sf::Text resultText(WindowManager::getFont());
+            resultText.setCharacterSize(20);
+            resultText.setFillColor(sf::Color::White);
+            resultText.setPosition({10.f, 10.f});
+            resultText.setString("You lose!");  
+            window.draw(resultText);
             return;
         }
 
         case PLAYER_WON: {
-
-            m_drawCounterText.setString("You win!");
-            window.draw(m_drawCounterText);
-
+            sf::Text resultText(WindowManager::getFont());
+            resultText.setCharacterSize(20);
+            resultText.setFillColor(sf::Color::White);
+            resultText.setPosition({10.f, 10.f});
+            resultText.setString("You win!");  
+            window.draw(resultText);
             return;
         }
 
@@ -235,18 +230,7 @@ m_sequence->getPlayer()->draw();
                     m_selectedCard = -1;
 
                     m_sequence->getPlayer()->getDeck().deactivateCard(card);
-
-                    m_cardsPlayed += 1;
-
-                    if (m_cardsPlayed % 3 == 0) {
-                        refreshHand();
-                        m_selectedCard = -1;
-                        for (auto& enemy : m_sequence->getEnemies()) {
-                            enemy->attack(*m_sequence->getPlayer());
-                        }
-                    }
-                    updateDrawCounterDisplay();
-
+                    m_turnManager.onCardPlayed(card);
                 }
 
                 break;
@@ -265,7 +249,7 @@ statsText.setString(
 );
 window.draw(statsText);
 
-    window.draw(m_drawCounterText);
+    window.draw(m_turnManager.getDrawCounterText());
 }
 
 bool BattleStage::isCharacterHovered() {
@@ -288,22 +272,4 @@ bool BattleStage::isCharacterHovered() {
         m_playerHovered = false;
     }
     return false;
-}
-
-void BattleStage::updateDrawCounterDisplay() {
-    int remaining = 3 - (m_cardsPlayed % 3);
-    m_drawCounterText.setString("actions left: " + std::to_string(remaining));
-}
-
-void BattleStage::refreshHand() {
-    std::vector<std::shared_ptr<Card>> active = m_sequence->getPlayer()->getDeck().getCards();
-    for (auto& card : active) {
-        m_sequence->getPlayer()->getDeck().deactivateCard(card);
-    }
-
-    if (m_sequence->getPlayer()->getDeck().getInactiveCount() < 8) {
-        m_sequence->getPlayer()->getDeck().reshuffleDiscard();
-    }
-
-    m_sequence->getPlayer()->getDeck().activateCards(8);
 }

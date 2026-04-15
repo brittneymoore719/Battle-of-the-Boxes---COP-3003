@@ -1,7 +1,7 @@
 #ifndef TURNMANAGER_H
 #define TURNMANAGER_H
 
-#include <SFML/Graohics/Text.hpp>
+#include <SFML/Graphics/Text.hpp>
 #include "CombatSequence.h"
 #include "deck/Deck.h"
 

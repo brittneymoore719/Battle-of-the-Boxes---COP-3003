@@ -2,7 +2,7 @@
 #include "WindowManager.h"
 #include "game/entity/enemy/Enemy.h"
 
-TurnManager::TurnManager(combatSequence& sequence)
+TurnManager::TurnManager(CombatSequence& sequence)
 	: m_sequence(sequence),
 	m_cardsPlayed(0),
 	m_drawCounterText(WindowManager::getFont())
