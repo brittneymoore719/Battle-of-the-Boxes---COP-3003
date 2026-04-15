@@ -1,6 +1,6 @@
 //
 // Created by Ethan Pedrick on 4/5/2026.
-//
+// edited by Brittney Moore 4/14/2026
 
 #ifndef BATTLE_OF_THE_BOXES_BATTLESTAGE_H
 #define BATTLE_OF_THE_BOXES_BATTLESTAGE_H
@@ -47,6 +47,10 @@ private:
     void refreshHand();
 
     bool m_wasMousePressed;   // added to prevent actions from repeating when the mouse is held down
+    
+    //for the trash can
+    std::optional<sf::Texture> m_trashTexture;
+    std::optional<sf::Sprite> m_trashSprite;
 };
 
 #endif //BATTLE_OF_THE_BOXES_BATTLESTAGE_H

@@ -1,6 +1,6 @@
 //
 // Created by Ethan Pedrick on 4/5/2026.
-//
+// edited by Brittney Moore on 4/15/2026
 
 #include "BattleStage.h"
 #include "WindowManager.h"
@@ -54,6 +54,14 @@ else
         static_cast<float>(window.getSize().x) / bgSize.x,
         static_cast<float>(window.getSize().y) / bgSize.y
     });
+}
+m_trashTexture.emplace();
+if (!m_trashTexture->loadFromFile("dependencies/sprites/Trash.png")) {
+    std::cerr << "Failed to load Trash.png \n";
+} else {
+    m_trashSprite.emplace(*m_trashTexture);
+    m_trashSprite->setPosition({600.f, 500.f});
+    m_trashSprite->setScale({0.1f, 0.1f});
 }
     std::cout << "BattleStage initialized\n";
 }
@@ -148,6 +156,12 @@ if (m_menuOpen) {
     // there is probably some way to move some of the card logic out of here but i'm not sure how rn
 
     std::vector<std::shared_ptr<Card>>& cards = m_sequence->getPlayer()->getDeck().getCards();
+
+    //for the trash can 
+    if (m_trashSprite.has_value())
+    {
+        window.draw(*m_trashSprite);
+    }
 
     for (int i = 0; i < static_cast<int>(cards.size()); ++i) {
         std::shared_ptr<Card> card = cards.at(i);
