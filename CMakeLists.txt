@@ -19,7 +19,7 @@ file(GLOB_RECURSE
     ${CMAKE_SOURCE_DIR}/src/*.cpp
 )
 
-file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/src/sprites"
+file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/assets"
      DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/bin")
 
 

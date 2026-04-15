@@ -39,7 +39,7 @@ BattleStage::BattleStage(std::unique_ptr<CombatSequence> sequence)
     m_drawCounterText.setPosition({10.f, 10.f});
     updateDrawCounterDisplay();
     m_backgroundTexture.emplace();
-if (!m_backgroundTexture->loadFromFile("../../assets/sprites/battle_background.jpg"))
+if (!m_backgroundTexture->loadFromFile("assets/sprites/battle_background.jpg"))
 {
     std::cerr << "Failed to load battle_background.jpg\n";
 }

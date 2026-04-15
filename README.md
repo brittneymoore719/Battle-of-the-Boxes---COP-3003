@@ -12,7 +12,7 @@ to build manually in a terminal
 cmake -B build
 cmake --build build
 ```
-if you are using visual studio then install git from here: https://git-scm.com/install/
+if you are using visual studio then install git from here: https://git-scm.com/install/ <br>
 even if you already have git installed from visual studio you need install it again from the above link
 
 if you are on linux make sure you have all of sfml's requirements found on [sfml's documentation](https://www.sfml-dev.org/tutorials/3.0/getting-started/cmake/#customize-the-cmake-project-and-executable-names)

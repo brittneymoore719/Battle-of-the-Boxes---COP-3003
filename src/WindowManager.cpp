@@ -1,4 +1,5 @@
 #include "WindowManager.h"
+#include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Mouse.hpp>
@@ -7,10 +8,11 @@
 
 
 sf::RenderWindow WindowManager::m_window;
-sf::Font WindowManager::m_font("arial.ttf");
+sf::Font WindowManager::m_font;
 
 void WindowManager::createWindow() {
     m_window = sf::RenderWindow(sf::VideoMode({GameConstants::WINDOW_WIDTH, GameConstants::WINDOW_HEIGHT}), "Battle Of The Boxes");
+    m_font = sf::Font("arial.ttf");
 }
 
 sf::RenderWindow& WindowManager::getWindow() {
