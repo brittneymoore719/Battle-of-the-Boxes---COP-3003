@@ -29,9 +29,10 @@ BattleStage::BattleStage(std::unique_ptr<CombatSequence> sequence)
       m_cardsPlayed{0},
       m_drawCounterText(WindowManager::getFont()),
       m_wasMousePressed{false},
-      m_menuButton{"Menu", {700.f, 40.f}, {120.f, 50.f}},
-      m_exitButton{"Exit", {700.f, 100.f}, {120.f, 50.f}},
-      m_discardButton {"Discard", {750.f, 450.f}, {120.f, 50.f}},
+      m_menuButton{"Menu", {600.f, 40.f}, {120.f, 50.f}},
+      m_exitButton{"Exit", {600.f, 100.f}, {120.f, 50.f}},
+      m_discardButton {"Discard", {600.f, 450.f}, {120.f, 50.f}},
+      m_passButton {"Pass", {400.f, 520.f}, {120.f, 50.f}},
       m_menuOpen{false}
 {
     m_sequence->getPlayer()->getDeck().activateCards(8);
@@ -122,13 +123,15 @@ if (m_menuOpen) {
 
 m_discardButton.update();
 if (m_discardButton.hasBeenClicked()) {
-    std::cout << "Discard button clicked at position 750, 450!\n";
+    std::cout << "Discard button clicked at position 600, 450!\n";
     if (m_selectedCard != -1) {
         m_selectedCard = -1;
         mouseJustPressed = false;  //hopefully prevent card from reselecting 
 }
 }
-    m_sequence->getPlayer()->draw();
+
+
+m_sequence->getPlayer()->draw();
 
     // basically should combat continue
 

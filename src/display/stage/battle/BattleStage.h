@@ -53,6 +53,9 @@ private:
     // std::optional<sf::Texture> m_trashTexture;
     //std::optional<sf::Sprite> m_trashSprite;
     UiButton m_discardButton;
+
+    //for pass button
+    UiButton m_passButton;
 };
 
 #endif //BATTLE_OF_THE_BOXES_BATTLESTAGE_H
