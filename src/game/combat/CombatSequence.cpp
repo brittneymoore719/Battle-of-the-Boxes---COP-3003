@@ -1,6 +1,6 @@
 //
 // Created by Ethan Pedrick on 4/13/26.
-//
+// edited by Brittney Moore on 4/15/2026
 
 #include "CombatSequence.h"
 
