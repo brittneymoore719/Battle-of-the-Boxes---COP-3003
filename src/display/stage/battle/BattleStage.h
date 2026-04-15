@@ -49,8 +49,10 @@ private:
     bool m_wasMousePressed;   // added to prevent actions from repeating when the mouse is held down
     
     //for the trash can
-    std::optional<sf::Texture> m_trashTexture;
-    std::optional<sf::Sprite> m_trashSprite;
+    //attempt at disguard button with trash image, trouble shoot with late
+    // std::optional<sf::Texture> m_trashTexture;
+    //std::optional<sf::Sprite> m_trashSprite;
+    UiButton m_discardButton;
 };
 
 #endif //BATTLE_OF_THE_BOXES_BATTLESTAGE_H

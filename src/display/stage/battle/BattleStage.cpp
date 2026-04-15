@@ -11,6 +11,7 @@
 #include <iostream>
 #include <memory>
 #include <vector>
+#include <filesystem>
 
 #include "game/combat/deck/DeckManager.h"
 #include "game/entity/enemy/Enemy.h"
@@ -30,6 +31,7 @@ BattleStage::BattleStage(std::unique_ptr<CombatSequence> sequence)
       m_wasMousePressed{false},
       m_menuButton{"Menu", {700.f, 40.f}, {120.f, 50.f}},
       m_exitButton{"Exit", {700.f, 100.f}, {120.f, 50.f}},
+      m_discardButton {"Discard", {750.f, 450.f}, {120.f, 50.f}},
       m_menuOpen{false}
 {
     m_sequence->getPlayer()->getDeck().activateCards(8);
@@ -55,16 +57,41 @@ else
         static_cast<float>(window.getSize().y) / bgSize.y
     });
 }
-m_trashTexture.emplace();
-if (!m_trashTexture->loadFromFile("dependencies/sprites/Trash.png")) {
-    std::cerr << "Failed to load Trash.png \n";
-} else {
-    m_trashSprite.emplace(*m_trashTexture);
-    m_trashSprite->setPosition({600.f, 500.f});
-    m_trashSprite->setScale({0.1f, 0.1f});
+//m_trashTexture.emplace();
+
+// List of places to look for the trash sprite
+/*trouble shoot with later this works
+
+std::vector<std::string> pathsToTry = {
+    "dependencies/sprites/Trash.png",
+    "assets/sprites/Trash.png",
+    "sprites/Trash.png",
+    "Trash.png"
+};
+*/
+
+// Try each path until we find the file
+//finding file for trash try this works for troubleshooting late
+/* bool found = false;
+for (const auto& path : pathsToTry) {
+    if (m_trashTexture->loadFromFile(path)) {
+        m_trashSprite.emplace(*m_trashTexture);
+        m_trashSprite->setPosition({750.f, 550.f});
+        m_trashSprite->setScale({0.25f, 0.25f});
+        std::cerr << "Successfully loaded Trash.png from: " << path << "\n";
+        found = true;
+        break;
+    }
 }
+
+if (!found) {
+    std::cerr << "Failed to load Trash.png from any location\n";
+}
+*/
     std::cout << "BattleStage initialized\n";
 }
+
+
 
 void BattleStage::update() {
     sf::RenderWindow& window = WindowManager::getWindow();
@@ -88,10 +115,19 @@ if (m_menuOpen) {
         return;
     }
 }
+
     bool mouseCurrentlyPressed = sf::Mouse::isButtonPressed(sf::Mouse::Button::Left);
     bool mouseJustPressed = mouseCurrentlyPressed && !m_wasMousePressed;
     m_wasMousePressed = mouseCurrentlyPressed;
 
+m_discardButton.update();
+if (m_discardButton.hasBeenClicked()) {
+    std::cout << "Discard button clicked at position 750, 450!\n";
+    if (m_selectedCard != -1) {
+        m_selectedCard = -1;
+        mouseJustPressed = false;  //hopefully prevent card from reselecting 
+}
+}
     m_sequence->getPlayer()->draw();
 
     // basically should combat continue
@@ -158,11 +194,12 @@ if (m_menuOpen) {
     std::vector<std::shared_ptr<Card>>& cards = m_sequence->getPlayer()->getDeck().getCards();
 
     //for the trash can 
+    /* trouble shoot with later 
     if (m_trashSprite.has_value())
     {
         window.draw(*m_trashSprite);
     }
-
+    */
     for (int i = 0; i < static_cast<int>(cards.size()); ++i) {
         std::shared_ptr<Card> card = cards.at(i);
 
