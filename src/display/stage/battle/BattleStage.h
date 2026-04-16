@@ -32,7 +32,7 @@ private:
     std::unique_ptr<CombatSequence> m_sequence;
     TurnManager m_turnManager;
 
-
+    int m_selectedCard;
     Enemy* m_hoveredEnemy;
     bool m_playerHovered;
     bool m_allEnemiesDead;
