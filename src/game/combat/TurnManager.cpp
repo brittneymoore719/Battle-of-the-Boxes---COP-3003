@@ -40,6 +40,7 @@ void TurnManager::endPlayerTurn() {
     }
 }
 
+//function for passturn
 void TurnManager::passTurn() { endPlayerTurn(); }
 
 void TurnManager::onCardPlayed(std::shared_ptr<Card> card) {
