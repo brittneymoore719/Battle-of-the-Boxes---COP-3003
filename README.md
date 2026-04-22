@@ -73,8 +73,8 @@ Characters are built from smaller parts like Deck and HealthPool
 - Responsibility 1
 - Responsibility 2
 ### Member 3: Brittney
-- Responsibility 1
-- Responsibility 2
+- built the pass button
+- built the discard button
 ### Member 4: Woodoplh 
 - Responsibility 1
 - Responsibility 2
