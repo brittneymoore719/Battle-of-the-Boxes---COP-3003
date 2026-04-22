@@ -1,10 +1,11 @@
 # Battle of the Boxes
-Brief description of your project (1–2 sentences).
 
-A roguelike turn-based dungeoncrawler (innovative, I know...) 
-where the user plays as a box trying to escape an Amazon warehouse. 
-During their escape, they have to battle zombie-like workers and finally 
-defeat Jeff Bezos to win.
+Brief description of your project (1–2 sentences).
+A resource efficent deck builder game built using sfml and C++. Once the player starts the game,
+they are a box with a health bar and block bar. They are playing against a worker from the warehouse,
+who is trying to attack them. The main premise is that the box is trying to escape the warehouse, and
+the workers are trying to keep them there. Potentially later on, the final boss would be a battle against
+Jeff Bezos. 
 
 ---
 ## Team Members
@@ -167,3 +168,7 @@ The player will use either W, A, S, and D keys to move throughout the game, with
 ## UML diagram
 ![UML Diagram Image](uml.png)
 to generate an image from the d2 code run: d2 uml.d2 uml.png
+
+
+## Additional Notes
+- We initially had a much larger project but condensed it due to time constraints
