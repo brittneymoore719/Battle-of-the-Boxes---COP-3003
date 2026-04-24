@@ -67,8 +67,8 @@ Characters are built from smaller parts like Deck and HealthPool
 
 ## Team Contributions
 ### Member 1: Ethan 
-- Responsibility 1
-- Responsibility 2
+- Project File structure management; general class creation and organization
+- CombatSequence, card use validation
 ### Member 2: Fisher
 - Responsibility 1
 - Responsibility 2
