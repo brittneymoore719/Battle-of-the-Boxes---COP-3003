@@ -32,6 +32,11 @@ sf::Vector2f WindowManager::getMousePos() {
     return m_window.mapPixelToCoords(sf::Mouse::getPosition(m_window));
 }
 
+template<typename T>
+sf::Vector2<T> WindowManager::getWindowSize() {
+    return static_cast<sf::Vector2<T>>(m_window.getSize());
+}
+
 sf::Font& WindowManager::getFont(){
     return m_font;
 }

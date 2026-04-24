@@ -10,6 +10,8 @@ public:
     static sf::RenderWindow& getWindow();
     static void handleEvents();
     static sf::Vector2f getMousePos();
+    template<typename T>
+    static sf::Vector2<T> getWindowSize();
     static sf::Font& getFont();
 private:
     static sf::RenderWindow m_window;

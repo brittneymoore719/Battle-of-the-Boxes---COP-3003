@@ -33,8 +33,6 @@ cmake --build build
 ```
 make sure you have all of sfml's requirements found on [sfml's documentation](https://www.sfml-dev.org/tutorials/3.0/getting-started/cmake/#customize-the-cmake-project-and-executable-names)
 
-if you are on linux make sure you have all of sfml's requirements 
-found on [sfml's documentation](https://www.sfml-dev.org/tutorials/3.0/getting-started/cmake/#customize-the-cmake-project-and-executable-names)
 ---
 ## Features
 - Feature 1 card decks
@@ -135,7 +133,7 @@ The player will use either W, A, S, and D keys to move throughout the game, with
 - __Inheritance__
   - PlayerCharacter and Enemy are derived classes of Character
 - __Templates__
-  - \
+  - getWindowSize template returns the window size in any sf::Vector2 type, performing the conversion to the target sf::Vector2 type for you 
 - __Polymorphism__
   - The Card class has a virtual __use__ method which is used with an array of Card derived objects in the Character class
 - __Abstract Classes__
