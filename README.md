@@ -174,7 +174,8 @@ has been:
   - Arrays and/or vectors
     - A vector is used for managing the list of cards within a Deck object
 - Exception Handling
-  - \
+  - loading textures are within try blocks, sfml throws a sf::Exception exception which is then caught and an error message is displayed
+  - sfml loads textures relative to the current working directory (CWD), which is set to the exe's directory when launching the game. The code to set the CWD is wrapped in a try block to catch any errors thrown when trying to set the CWD and displays an error message in case of failure.
 ### GUI Requirements
 - Event-driven GUI
   - sfml uses an event loop to manage user input and drawing graphics to the screen

@@ -6,6 +6,7 @@
     #include "WindowManager.h"
     #include "display/stage/Stage.h"
     #include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/Texture.hpp>
     #include <SFML/Window/Mouse.hpp>
     #include <format>
     #include <iostream>
@@ -35,12 +36,9 @@
           m_menuOpen{false} {
         m_sequence->getPlayer()->getDeck().activateCards(8);
         m_backgroundTexture.emplace();
-    if (!m_backgroundTexture->loadFromFile("assets/sprites/battle_background.jpg"))
-    {
-        std::cerr << "Failed to load battle_background.jpg\n";
-    }
-    else
-    {
+    try {
+        m_backgroundTexture = sf::Texture("assets/sprites/battle_background.jpg");
+
         m_backgroundSprite.emplace(*m_backgroundTexture);
 
         sf::RenderWindow& window = WindowManager::getWindow();
@@ -48,6 +46,10 @@
 
         m_backgroundSprite->setScale(WindowManager::getWindowSize<float>().componentWiseDiv(bgSize));
     }
+    catch (sf::Exception e) {
+        std::cerr << "Failed to load battle_background.jpg\n";
+    }
+
     //m_trashTexture.emplace();
 
     // List of places to look for the trash sprite
