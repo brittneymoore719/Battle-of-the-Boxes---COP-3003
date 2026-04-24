@@ -38,9 +38,10 @@ make sure you have all of sfml's requirements found on [sfml's documentation](ht
 - Feature 1 card decks
 - Feature 2 pass button
 - Feature 3 discard button
-- Feature 4 exit
+- Feature 4 exit button accessible from title and battle menu
 - Feature 5 block and attack
-- Feature 6 the characters box and worker
+- Feature 6 the characters box and worker along with a background image
+- Feature 7 player name input on title screen
 
 ---
 ## OOP Concepts Used
@@ -67,15 +68,28 @@ Characters are built from smaller parts like Deck and HealthPool
 ### Member 1: Ethan 
 - Project File structure management; general class creation and organization
 - CombatSequence, card use validation
+- Created sprites for the zombie worker and box
+- Code reviewer and debugger.
+- feature suggestor
 ### Member 2: Fisher
 - Planning and implementation of underlying Stage system
-- Setting up cmake build configuration with sfml 
+- Setting up cmake build configuration with sfml
+- Code reviewer and debugger
+- Implemented change to code for project functionality on windows
+- feature suggestor
 ### Member 3: Brittney
 - built the pass button
 - built the discard button
+- Code reviewer and debugger
+- feature suggestor
 ### Member 4: Woodoplh 
-- Responsibility 1
-- Responsibility 2
+- Added exit button and battle stage menu system
+- Added background image
+- Debugged and fixed UiButton click detection
+- Added Player name input fiel to title screen
+-  Created deadlines and tasks to be assigned in terms of features to be implemented or issues to be      resolved.
+-  feature suggestor
+  
 ---
 
 ## AI and External Resources Disclosure (Required)
@@ -92,9 +106,11 @@ TaskManager.
 
 ## AI tools used
 
--Github AI: Helped to solve errors that we came across. 
+-Github AI: Helped to solve errors that we came across.
 - Claude: Helped to solve errors we came across, especially after trying to debug it for 30+ mins.
 - ChatGPT: Helped to solve errors came across, pasting the error into ChatGPT to figure why it wasn't working.
+  AI was used for debugging compile errors and to figure out better ways of implementation of features for either efficiency or brevity. All code output from AI were reviewed and used as learning material.
+  
 
 ### External Resources
 List all non-AI resources used:
@@ -104,11 +120,21 @@ List all non-AI resources used:
 - Sample code
 Include links when possible.
 
+Applications used: 
+-MS Visual Studios and other IDE.
+
 Youtube videos used:
 -Youtube Video on Github https://www.youtube.com/watch?v=a9u2yZvsqHA
 -Youtube Video on Guthub https://www.youtube.com/watch?v=Oaj3RBIoGFc&t=633s
 -Youtube video on SFML https://www.youtube.com/watch?v=yEiZalvDOj4&t=457s
 -Youtube video on pointers https://www.youtube.com/watch?v=eNofmKYzje4
+
+Websites Used:
+-https://www.king5.com/article/news/local/senate-investigation-amazon-warehouse-worker-injuries/281-e845aa31-8da2-4ee4-94b3-e6f350ac1cf5 (used thumbnail as battlestage background)
+-https://pixelartvillage.com(used to decrease image resolution to create pixel art to match sprites)
+
+For communication: 
+-Discord (website/app)
 
 ### Collaboration Policy Statement
 All submitted work reflects our team’s understanding. Any external code
@@ -119,7 +145,8 @@ has been:
 
 
 ### Controls
-The player will use either W, A, S, and D keys to move throughout the game, with some moments requiring input from the the players mouse with on screen buttons.
+-The player uses their moouse to interact with all buttons and cards on screen. These cards be dragged onto either the player itself or the enemy and be used on them. 
+-The player also types their into the input box on title screen using the keyboard.
 
 ## Project Requirements
 ### OOP Requirements
