@@ -46,10 +46,8 @@
         sf::RenderWindow& window = WindowManager::getWindow();
         const auto bgSize = m_backgroundSprite->getGlobalBounds().size;
 
-        m_backgroundSprite->setScale({
-            static_cast<float>(window.getSize().x) / bgSize.x,
-            static_cast<float>(window.getSize().y) / bgSize.y
-        });
+        // Update to use the new getWindowSize method
+        m_backgroundSprite->setScale(WindowManager::getWindowSize<float>().componentWiseDiv(bgSize));
     }
     //m_trashTexture.emplace();
 
@@ -119,7 +117,7 @@
         std::cout << "Discard button clicked at position 600, 450!\n";
         if (m_selectedCard != -1) {
             m_selectedCard = -1;
-            mouseJustPressed = false;  //hopefully prevent card from reselecting 
+            mouseJustPressed = false;  //hopefully prevent card from reselecting
     }
     }
 
@@ -142,7 +140,7 @@
                 resultText.setCharacterSize(20);
                 resultText.setFillColor(sf::Color::White);
                 resultText.setPosition({10.f, 10.f});
-                resultText.setString("You lose!");  
+                resultText.setString("You lose!");
                 window.draw(resultText);
                 return;
             }
@@ -152,7 +150,7 @@
                 resultText.setCharacterSize(20);
                 resultText.setFillColor(sf::Color::White);
                 resultText.setPosition({10.f, 10.f});
-                resultText.setString("You win!");  
+                resultText.setString("You win!");
                 window.draw(resultText);
                 return;
             }
@@ -199,8 +197,8 @@
 
         std::vector<std::shared_ptr<Card>>& cards = m_sequence->getPlayer()->getDeck().getCards();
 
-        //for the trash can 
-        /* trouble shoot with later 
+        //for the trash can
+        /* trouble shoot with later
         if (m_trashSprite.has_value())
         {
             window.draw(*m_trashSprite);

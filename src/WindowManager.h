@@ -13,7 +13,14 @@ public:
     static sf::Font& getFont();
     static sf::String getTypedInput();
     static void clearTypedInput();
-   private:
+
+    // Add getWindowSize method
+    template <typename T>
+    static sf::Vector2<T> getWindowSize() {
+        return static_cast<sf::Vector2<T>>(m_window.getSize());
+    }
+
+private:
     static sf::RenderWindow m_window;
     static sf::Font m_font;
     static sf::String m_typedInput;
