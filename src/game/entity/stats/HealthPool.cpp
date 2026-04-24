@@ -57,10 +57,12 @@ void HealthPool::takeDamage(double damageAmount) {
     if (m_block < 0) m_block = 0;
 
     m_current_health -= damageAmount;
+    m_current_health = clamp(m_current_health, 0.0, m_max_health);
 }
 
 void HealthPool::addBlock(double blockAmount) {
     m_block += blockAmount;
+    m_block = clamp(m_block, 0.0, m_max_health);
 }
 
 void HealthPool::resetBlock() {

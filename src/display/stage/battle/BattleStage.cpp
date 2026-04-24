@@ -44,6 +44,7 @@
         sf::RenderWindow& window = WindowManager::getWindow();
         const auto bgSize = m_backgroundSprite->getGlobalBounds().size;
 
+        // Update to use the new getWindowSize method
         m_backgroundSprite->setScale(WindowManager::getWindowSize<float>().componentWiseDiv(bgSize));
     }
     catch (sf::Exception e) {
