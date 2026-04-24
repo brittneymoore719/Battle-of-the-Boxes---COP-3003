@@ -3,6 +3,14 @@
 
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/System/Vector2.hpp>
+
+template <typename T>
+T clamp(T value, T low, T high) {
+    if (value < low) return low;
+    if (value > high) return high;
+    return value;
+}
+
 class HealthPool {
     public:
     explicit HealthPool(double max_hp);
