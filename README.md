@@ -68,8 +68,8 @@ Characters are built from smaller parts like Deck and HealthPool
 - Project File structure management; general class creation and organization
 - CombatSequence, card use validation
 ### Member 2: Fisher
-- Responsibility 1
-- Responsibility 2
+- Planning and implementation of underlying Stage system
+- Setting up cmake build configuration with sfml 
 ### Member 3: Brittney
 - built the pass button
 - built the discard button
