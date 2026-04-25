@@ -182,7 +182,7 @@ has been:
 - 3 different interactive components
   - Buttons such as start or exit buttons
   - Cards that increase in scale when hovered can be dragged around the screen
-  - HealthPools display their m_current_health and b_block data members with bars on screen
+  - Name entry text box on title screen
 - Input validation
   - clicking of buttons validate that the user's mouse is hovering over the button before it sets the m_clicked data member to true
 - Clear, user-facing error messages
